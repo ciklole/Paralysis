@@ -88,6 +88,10 @@ Desktop.ini
 # Project specific exclusions
 # ---------------------------------------------------------------------------
 # Large third-party sample content that is not used by the game.
+# The matching .meta files are excluded too, so no orphaned meta files
+# are committed for folders that are not part of the project.
 /Assets/vrbn_studios/
+/Assets/vrbn_studios.meta
 /Assets/BxB Studio/
+/Assets/BxB Studio.meta
 /Packages/dev.bxbstudio.*/
