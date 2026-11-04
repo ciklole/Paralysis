@@ -1,0 +1,2 @@
+# Large binary assets are stored with Git LFS so the repository stays usable.
+*.cubemap filter=lfs diff=lfs merge=lfs -text
