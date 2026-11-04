@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 7933818001c154245bdbaee201c704bc
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 8
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+    preloadAudioData: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 23837
+  packageName: Epic Adventure Orchestral Background Music (Free Sample)
+  packageVersion: 1.5
+  assetPath: Assets/Epic Adventure Orchestral Background Music/Resources/epic_battle/battle1/battle1B.wav
+  uploadId: 781642

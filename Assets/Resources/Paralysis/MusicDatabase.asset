@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f60718293a4b5c6d7e8f90, type: 3}
+  m_Name: MusicDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::MusicDatabase
+  masterVolume: 0.7
+  defaultCrossfade: 1.5
+  autoPlaySceneMusic: 1
+  keepMusicWhenUnbound: 1
+  fallbackCueId: 
+  cues:
+  - id: menu
+    displayName: Main Menu
+    description: Theme for the main menu and chapter selection.
+    clip: {fileID: 8300000, guid: 82b4968dddc0ec44f9d7d10ac8800011, type: 3}
+    volume: 0.6
+    loop: 1
+    fadeIn: 1.5
+    fadeOut: 1
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: start
+    displayName: Act 1 - Apartment Start
+    description: Opening theme when the apartment scene loads.
+    clip: {fileID: 8300000, guid: 45f32fa4a6e1d0e409518894a5ad9d0f, type: 3}
+    volume: 0.55
+    loop: 1
+    fadeIn: 2
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: home_lights_off
+    displayName: Act 1 - After The Lights
+    description: Optional cue after the last apartment light is switched off.
+    clip: {fileID: 8300000, guid: e9f698f435d38624188848110f1d49e8, type: 3}
+    volume: 0.6
+    loop: 1
+    fadeIn: 1.5
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: city
+    displayName: Act 2 - City
+    description: Theme when the city street scene loads.
+    clip: {fileID: 8300000, guid: 82b4968dddc0ec44f9d7d10ac8800011, type: 3}
+    volume: 0.55
+    loop: 1
+    fadeIn: 1.5
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: car_arc
+    displayName: Act 3 - Car Arc
+    description: Driving theme for the CarDriving scene.
+    clip: {fileID: 8300000, guid: a1bc324fac9b9b64d85298422bf1a76c, type: 3}
+    volume: 0.6
+    loop: 1
+    fadeIn: 1.5
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: car_arrival
+    displayName: Act 3 - Car Arrival
+    description: Optional sting or song when the car reaches the store.
+    clip: {fileID: 8300000, guid: 85d133424147c78429ab42fd9e0a3d3f, type: 3}
+    volume: 0.7
+    loop: 0
+    fadeIn: 0.25
+    fadeOut: 0.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: store
+    displayName: Act 4 - Store
+    description: Timed grocery theme for the store scene. Plays once.
+    clip: {fileID: 8300000, guid: ee4bdba5a9270664590dc8546d6a2a70, type: 3}
+    volume: 0.55
+    loop: 0
+    fadeIn: 1.5
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: store_ready_to_pay
+    displayName: Act 4 - Ready To Pay
+    description: Optional cue after every grocery item has been collected.
+    clip: {fileID: 0}
+    volume: 0.6
+    loop: 0
+    fadeIn: 1.5
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: store_checkout
+    displayName: Act 4 - Checkout
+    description: Optional tense cue when the cashier conversation starts.
+    clip: {fileID: 0}
+    volume: 0.65
+    loop: 1
+    fadeIn: 1
+    fadeOut: 1
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: scary_checkout
+    displayName: Act 4 - Scary Checkout
+    description: Horror cue when the cashier transforms.
+    clip: {fileID: 0}
+    volume: 0.7
+    loop: 1
+    fadeIn: 0.4
+    fadeOut: 0.8
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  - id: end
+    displayName: Ending - Demo End
+    description: Optional theme for the end-of-demo screen. Plays once.
+    clip: {fileID: 0}
+    volume: 0.6
+    loop: 0
+    fadeIn: 2
+    fadeOut: 1.5
+    pitch: 1
+    stinger: {fileID: 0}
+    stingerVolume: 0.8
+  scenes:
+  - sceneName: MainMenu
+    cueId: menu
+    restartWhenLoaded: 0
+  - sceneName: Home
+    cueId: start
+    restartWhenLoaded: 0
+  - sceneName: City
+    cueId: city
+    restartWhenLoaded: 0
+  - sceneName: CarDriving
+    cueId: car_arc
+    restartWhenLoaded: 0
+  - sceneName: Store
+    cueId: store
+    restartWhenLoaded: 0
+  - sceneName: End
+    cueId: end
+    restartWhenLoaded: 0

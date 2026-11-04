@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6101bfc083c0942938307b57682b96, type: 3}
+  m_Name: ChapterDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterDatabase
+  availabilityMode: 0
+  defaultIntroStyle:
+    numberFormat: CHAPTER {0}
+    numberStyle:
+      font: {fileID: 0}
+      fontSize: 64
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 4
+    numberAnchor: {x: 0.5, y: 0.5}
+    numberAnchoredPosition: {x: 0, y: 130}
+    numberSize: {x: 1400, y: 120}
+    titleStyle:
+      font: {fileID: 0}
+      fontSize: 96
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 4
+    titleAnchor: {x: 0.5, y: 0.5}
+    titleAnchoredPosition: {x: 0, y: 0}
+    titleSize: {x: 1600, y: 180}
+    subtitleStyle:
+      font: {fileID: 0}
+      fontSize: 32
+      bold: 0
+      color: {r: 0.68, g: 0.68, b: 0.68, a: 1}
+      alignment: 4
+    subtitleAnchor: {x: 0.5, y: 0.5}
+    subtitleAnchoredPosition: {x: 0, y: -130}
+    subtitleSize: {x: 1400, y: 120}
+    fadeInDuration: 0.6
+    displayDuration: 2.2
+    fadeOutDuration: 0.6
+    useUnscaledTime: 1
+  chapters:
+  - chapterId: chapter_1_apartment
+    chapterNumber: 1
+    chapterTitle: THE APARTMENT
+    subtitle: SOMETHING IS WRONG
+    description: Wake up, turn off the lights and leave the apartment.
+    sceneName: Home
+    displayOrder: 0
+    enabled: 1
+    showChapterIntro: 1
+    useGlobalIntroStyle: 1
+    introStyle:
+      numberFormat: CHAPTER {0}
+      numberStyle:
+        font: {fileID: 0}
+        fontSize: 64
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      numberAnchor: {x: 0.5, y: 0.5}
+      numberAnchoredPosition: {x: 0, y: 130}
+      numberSize: {x: 1400, y: 120}
+      titleStyle:
+        font: {fileID: 0}
+        fontSize: 96
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      titleAnchor: {x: 0.5, y: 0.5}
+      titleAnchoredPosition: {x: 0, y: 0}
+      titleSize: {x: 1600, y: 180}
+      subtitleStyle:
+        font: {fileID: 0}
+        fontSize: 32
+        bold: 0
+        color: {r: 0.68, g: 0.68, b: 0.68, a: 1}
+        alignment: 4
+      subtitleAnchor: {x: 0.5, y: 0.5}
+      subtitleAnchoredPosition: {x: 0, y: -130}
+      subtitleSize: {x: 1400, y: 120}
+      fadeInDuration: 0.6
+      displayDuration: 2.2
+      fadeOutDuration: 0.6
+      useUnscaledTime: 1
+  - chapterId: chapter_2_city
+    chapterNumber: 2
+    chapterTitle: THE CITY
+    subtitle: KEEP MOVING
+    description: Drive through the empty city and find the store.
+    sceneName: City
+    displayOrder: 1
+    enabled: 1
+    showChapterIntro: 1
+    useGlobalIntroStyle: 1
+    introStyle:
+      numberFormat: CHAPTER {0}
+      numberStyle:
+        font: {fileID: 0}
+        fontSize: 64
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      numberAnchor: {x: 0.5, y: 0.5}
+      numberAnchoredPosition: {x: 0, y: 130}
+      numberSize: {x: 1400, y: 120}
+      titleStyle:
+        font: {fileID: 0}
+        fontSize: 96
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      titleAnchor: {x: 0.5, y: 0.5}
+      titleAnchoredPosition: {x: 0, y: 0}
+      titleSize: {x: 1600, y: 180}
+      subtitleStyle:
+        font: {fileID: 0}
+        fontSize: 32
+        bold: 0
+        color: {r: 0.68, g: 0.68, b: 0.68, a: 1}
+        alignment: 4
+      subtitleAnchor: {x: 0.5, y: 0.5}
+      subtitleAnchoredPosition: {x: 0, y: -130}
+      subtitleSize: {x: 1400, y: 120}
+      fadeInDuration: 0.6
+      displayDuration: 2.2
+      fadeOutDuration: 0.6
+      useUnscaledTime: 1
+  - chapterId: chapter_3_store
+    chapterNumber: 3
+    chapterTitle: THE STORE
+    subtitle: CLOSING TIME
+    description: Collect what you need before the cashier notices you.
+    sceneName: Store
+    displayOrder: 2
+    enabled: 1
+    showChapterIntro: 1
+    useGlobalIntroStyle: 1
+    introStyle:
+      numberFormat: CHAPTER {0}
+      numberStyle:
+        font: {fileID: 0}
+        fontSize: 64
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      numberAnchor: {x: 0.5, y: 0.5}
+      numberAnchoredPosition: {x: 0, y: 130}
+      numberSize: {x: 1400, y: 120}
+      titleStyle:
+        font: {fileID: 0}
+        fontSize: 96
+        bold: 1
+        color: {r: 1, g: 1, b: 1, a: 1}
+        alignment: 4
+      titleAnchor: {x: 0.5, y: 0.5}
+      titleAnchoredPosition: {x: 0, y: 0}
+      titleSize: {x: 1600, y: 180}
+      subtitleStyle:
+        font: {fileID: 0}
+        fontSize: 32
+        bold: 0
+        color: {r: 0.68, g: 0.68, b: 0.68, a: 1}
+        alignment: 4
+      subtitleAnchor: {x: 0.5, y: 0.5}
+      subtitleAnchoredPosition: {x: 0, y: -130}
+      subtitleSize: {x: 1400, y: 120}
+      fadeInDuration: 0.6
+      displayDuration: 2.2
+      fadeOutDuration: 0.6
+      useUnscaledTime: 1

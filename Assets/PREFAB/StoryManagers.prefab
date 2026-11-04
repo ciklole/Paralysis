@@ -1,0 +1,456 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8998121439012392485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3744660224073435539}
+  - component: {fileID: 4453532642361231853}
+  - component: {fileID: 3013096282655460770}
+  - component: {fileID: 3295163071617311265}
+  - component: {fileID: 4906896472114110187}
+  - component: {fileID: 761395975334233026}
+  - component: {fileID: 93886778815366787}
+  - component: {fileID: 2763559018438758099}
+  - component: {fileID: 7246885375301195925}
+  m_Layer: 0
+  m_Name: StoryManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3744660224073435539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.42123, y: 0.00000047683716, z: -46.366287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4453532642361231853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107c08558267f6548a63b86b71014a7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem
+  widthPercent: 1
+  maxWidth: 1920
+  panelHeight: 210
+  bottomMargin: 0
+  padding: 26
+  panelColor: {r: 0, g: 0, b: 0, a: 0.09803922}
+  speakerStyle:
+    font: {fileID: 0}
+    fontSize: 24
+    bold: 1
+    color: {r: 1, g: 0.84, b: 0.42, a: 1}
+    alignment: 0
+  bodyStyle:
+    font: {fileID: 0}
+    fontSize: 28
+    bold: 0
+    color: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    alignment: 0
+  speakerHeight: 30
+  defaultSpeakerColor: {r: 1, g: 0.84, b: 0.42, a: 1}
+  speakerColors:
+  - speaker: You
+    color: {r: 1, g: 0.84, b: 0.42, a: 1}
+  - speaker: Player
+    color: {r: 1, g: 0.84, b: 0.42, a: 1}
+  - speaker: Cashier
+    color: {r: 0.35, g: 1, b: 0.45, a: 1}
+  - speaker: It
+    color: {r: 0.85, g: 0.05, b: 0.05, a: 1}
+  - speaker: ???
+    color: {r: 0.85, g: 0.05, b: 0.05, a: 1}
+  - speaker: Thing
+    color: {r: 0.85, g: 0.05, b: 0.05, a: 1}
+  - speaker: Monster
+    color: {r: 0.85, g: 0.05, b: 0.05, a: 1}
+  typewriter: 1
+  charactersPerSecond: 35
+  leftClickAdvances: 1
+  advanceKey: 32
+  defaultLockMovement: 1
+  queueWhenBusy: 1
+  voiceSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  volume: 1
+--- !u!114 &3013096282655460770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9005bd5231ac9a64bb42342bf3290b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightsObjective
+  objectiveId: turn_off_lights
+  objectiveText: Turn off all the lights in the house
+  nextObjectiveId: go_to_car
+  nextObjectiveText: Go outside to the car
+  requiredSwitches: []
+  autoFindSwitches: 1
+  activateOnStart: 0
+  completeObjectiveItself: 1
+  requireAnyLightWasOn: 1
+  checkInterval: 0.25
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3295163071617311265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb7b782899e1a545a32caa5cb1c2023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  maxViewAngle: 40
+  maxRange: 7
+  requireLineOfSight: 1
+  blockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  promptFormat: '{0}'
+  promptStyle:
+    font: {fileID: 0}
+    fontSize: 24
+    bold: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 4
+  promptBackground: {r: 0, g: 0, b: 0, a: 0.039215688}
+  promptAnchor: {x: 0.5, y: 0.5}
+  promptOffset: {x: 0, y: -60}
+  promptSize: {x: 560, y: 54}
+  enableOutline: 1
+--- !u!114 &4906896472114110187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d9e54eabbcd5340a6ac71a0dc63fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectiveManager
+  headerText: OBJECTIVE
+  headerStyle:
+    font: {fileID: 0}
+    fontSize: 20
+    bold: 1
+    color: {r: 1, g: 0.84, b: 0.42, a: 1}
+    alignment: 0
+  bodyStyle:
+    font: {fileID: 0}
+    fontSize: 26
+    bold: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 0
+  panelColor: {r: 0, g: 0, b: 0, a: 0.050980393}
+  screenPosition: {x: 40, y: -40}
+  panelSize: {x: 560, y: 130}
+  completedDisplayTime: 2
+--- !u!114 &761395975334233026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a56e2246c5e4242904731fb944f39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestLogUI
+  toggleKey: 109
+  lockPlayerWhileOpen: 1
+  autoOpenScene: 
+  titleText: MISSION LOG
+  titleStyle:
+    font: {fileID: 0}
+    fontSize: 40
+    bold: 1
+    color: {r: 1, g: 0.84, b: 0.42, a: 1}
+    alignment: 4
+  bodyStyle:
+    font: {fileID: 0}
+    fontSize: 26
+    bold: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 0
+  dimColor: {r: 0, g: 0, b: 0, a: 0.13725491}
+  panelColor: {r: 0.06, g: 0.06, b: 0.08, a: 0.42745098}
+  panelSize: {x: 880, y: 700}
+  padding: 40
+  refreshInterval: 0.2
+--- !u!114 &93886778815366787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46196911f2189664cbfc1c9f016062d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShoppingCart
+  items:
+  - id: bread
+    displayName: Bread
+    requiredQuantity: 1
+    collectedQuantity: 0
+    icon: {fileID: 0}
+    description: 
+    pickupSound: {fileID: 0}
+    displayOrder: 0
+  - id: milk
+    displayName: Milk
+    requiredQuantity: 1
+    collectedQuantity: 0
+    icon: {fileID: 0}
+    description: 
+    pickupSound: {fileID: 0}
+    displayOrder: 1
+  - id: eggs
+    displayName: Eggs
+    requiredQuantity: 1
+    collectedQuantity: 0
+    icon: {fileID: 0}
+    description: 
+    pickupSound: {fileID: 0}
+    displayOrder: 2
+--- !u!114 &2763559018438758099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc6d2e6c21bfb046b7c56cd99a263cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToastUI
+  screenAnchor: {x: 0.5, y: 0.44}
+  panelSize: {x: 1180, y: 90}
+  panelColor: {r: 0, g: 0, b: 0, a: 0.3254902}
+  padding: 18
+  style:
+    font: {fileID: 0}
+    fontSize: 26
+    bold: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 4
+--- !u!114 &7246885375301195925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8998121439012392485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4851f6795eca4b44b91fb59d1369727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoryDirector
+  apartmentScene: Home
+  cityScene: City
+  storeScene: Store
+  apartmentOpening:
+    sequence: {fileID: 0}
+    conversationId: APT_Opening_01
+    lockPlayerMovement: 1
+    lines:
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Alright. Let's get this over with.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: I should probably get some groceries before it gets too late.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Where did I put that shopping list?
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Ah, there it is. Bread, milk, eggs... I think that's everything.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+  apartmentIntroDelay: 1
+  objectiveActivationDelay: 0.5
+  playApartmentOpening: 1
+  lightsObjective: {fileID: 0}
+  lightsCompletedDialogue:
+    sequence: {fileID: 0}
+    conversationId: APT_LightsDone_01
+    lockPlayerMovement: 1
+    lines:
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Finally. Let's go.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+  lightsNotificationDelay: 0.5
+  playLightsCompletedDialogue: 1
+  storeOpening:
+    sequence: {fileID: 0}
+    conversationId: STORE_Opening_01
+    lockPlayerMovement: 1
+    lines:
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Alright. Let's see what we need.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: Bread, milk, eggs... should be easy enough.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+  storeIntroDelay: 0.75
+  storeInstruction: Press M to view your shopping list. Find each item and press F to collect it.
+  storeInstructionDuration: 5
+  autoOpenQuestLogInStore: 1
+  autoOpenQuestLogDelay: 5
+  requireCarTripForStoreCompletion: 1
+  cart: {fileID: 0}
+  firstPickupDialogue:
+    sequence: {fileID: 0}
+    conversationId: STORE_FirstPickup_01
+    lockPlayerMovement: 1
+    lines:
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: One down.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+  allCollectedDialogue:
+    sequence: {fileID: 0}
+    conversationId: STORE_AllCollected_01
+    lockPlayerMovement: 1
+    lines:
+    - speaker: You
+      speakerColor: {r: 0, g: 0, b: 0, a: 0}
+      text: That's everything. Time to pay.
+      voiceClip: {fileID: 0}
+      soundEffect: {fileID: 0}
+      delayBefore: 0
+      overrideTypewriter: 0
+      useTypewriter: 1
+      pauseAfter: 0.25
+      movementLock: 0
+      onLineFinished:
+        m_PersistentCalls:
+          m_Calls: []
+  playFirstPickupDialogue: 1
+  playAllCollectedDialogue: 1
+  lightsObjectiveId: turn_off_lights
+  lightsObjectiveText: Turn off all the lights in the house
+  goToCarObjectiveId: go_to_car
+  goToCarObjectiveText: Go outside to the car
+  driveObjectiveId: drive_to_store
+  driveObjectiveText: Drive to the grocery store
+  collectObjectiveId: collect_groceries
+  collectObjectiveText: Collect the required groceries
+  payObjectiveId: pay_groceries
+  payObjectiveText: Pay for the groceries
+  enableDebugKeys: 1

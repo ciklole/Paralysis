@@ -1,0 +1,341 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3599de2bf2d53343b90c1b6a57e25e3, type: 3}
+  m_Name: MainMenuConfig
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuConfig
+  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundSprite: {fileID: 0}
+  showTitle: 1
+  titleText: PARALYSIS
+  titleStyle:
+    font: {fileID: 12800000, guid: e53b5896f7ca14845a3e3d46768f20aa, type: 3}
+    fontSize: 104
+    bold: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 4
+  titleOffset: {x: 0, y: 92}
+  titleSize: {x: 1500, y: 180}
+  newGameLabel: NEW GAME
+  continueLabel: CONTINUE
+  chaptersLabel: CHAPTERS
+  settingsLabel: SETTINGS
+  quitLabel: QUIT GAME
+  buttonTextStyle:
+    font: {fileID: 0}
+    fontSize: 38
+    bold: 0
+    color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    alignment: 4
+  buttonStyle:
+    hoverOffset: 11
+    duration: 0.17
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalFontSize: 38
+    normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    normalBold: 0
+    normalFont: {fileID: 0}
+    hoverFontSize: 44
+    hoverColor: {r: 1, g: 1, b: 1, a: 1}
+    hoverBold: 1
+    hoverFont: {fileID: 0}
+    selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+    disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  buttonStart: {x: 0, y: 120}
+  buttonSize: {x: 560, y: 66}
+  buttonSpacing: 18
+  noSaveLabel: NO SAVE FOUND
+  secondaryTextStyle:
+    font: {fileID: 0}
+    fontSize: 17
+    bold: 0
+    color: {r: 0.55, g: 0.55, b: 0.55, a: 1}
+    alignment: 4
+  secondaryOffset: {x: 0, y: -30}
+  secondarySize: {x: 560, y: 24}
+  statusStyle:
+    font: {fileID: 0}
+    fontSize: 20
+    bold: 0
+    color: {r: 0.9, g: 0.45, b: 0.4, a: 1}
+    alignment: 4
+  statusOffset: {x: 0, y: 44}
+  statusSize: {x: 1100, y: 40}
+  statusDuration: 3.5
+  chapterScreenTitle: CHAPTERS
+  chapterScreenTitleStyle:
+    font: {fileID: 0}
+    fontSize: 52
+    bold: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    alignment: 4
+  chapterTitleOffset: {x: 0, y: 88}
+  chapterTitleSize: {x: 1200, y: 100}
+  chapterListSize: {x: 1040, y: 560}
+  chapterListOffset: {x: 0, y: -30}
+  chapterLabelFormat: CHAPTER {0}   {1}
+  chapterLockedSuffix: '   [LOCKED]'
+  chapterEmptyLabel: NO CHAPTERS CONFIGURED
+  chapterEmptyStyle:
+    font: {fileID: 0}
+    fontSize: 24
+    bold: 0
+    color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+    alignment: 4
+  chapterButtonTextStyle:
+    font: {fileID: 0}
+    fontSize: 30
+    bold: 0
+    color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    alignment: 3
+  chapterButtonStyle:
+    hoverOffset: 7
+    duration: 0.15
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalFontSize: 30
+    normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    normalBold: 0
+    normalFont: {fileID: 0}
+    hoverFontSize: 34
+    hoverColor: {r: 1, g: 1, b: 1, a: 1}
+    hoverBold: 1
+    hoverFont: {fileID: 0}
+    selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+    disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  chapterButtonHeight: 68
+  chapterButtonSpacing: 12
+  chapterBackdrop: {r: 0, g: 0, b: 0, a: 0.72}
+  chapterBackLabel: BACK
+  chapterBackTextStyle:
+    font: {fileID: 0}
+    fontSize: 28
+    bold: 0
+    color: {r: 1, g: 0.57169807, b: 0.57169807, a: 1}
+    alignment: 4
+  chapterBackStyle:
+    hoverOffset: 8
+    duration: 0.15
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalFontSize: 28
+    normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    normalBold: 0
+    normalFont: {fileID: 0}
+    hoverFontSize: 32
+    hoverColor: {r: 1, g: 1, b: 1, a: 1}
+    hoverBold: 1
+    hoverFont: {fileID: 0}
+    selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+    disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  chapterBackOffset: {x: 0, y: 80}
+  chapterBackSize: {x: 260, y: 58}
+  settingsPanel:
+    showTitle: 1
+    titleText: SETTINGS
+    sensitivityLabel: MOUSE SENSITIVITY
+    frameRateLabel: FRAME RATE
+    backLabel: BACK
+    fpsFormat: '{0} FPS'
+    valueFormat: '{0}'
+    titleStyle:
+      font: {fileID: 0}
+      fontSize: 48
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 4
+    labelStyle:
+      font: {fileID: 0}
+      fontSize: 28
+      bold: 0
+      color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+      alignment: 3
+    valueStyle:
+      font: {fileID: 0}
+      fontSize: 26
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 5
+    buttonTextStyle:
+      font: {fileID: 0}
+      fontSize: 26
+      bold: 0
+      color: {r: 0.62, g: 0.62, b: 0.62, a: 1}
+      alignment: 4
+    optionButtonStyle:
+      hoverOffset: 4
+      duration: 0.12
+      easing:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      normalFontSize: 26
+      normalColor: {r: 0.62, g: 0.62, b: 0.62, a: 1}
+      normalBold: 0
+      normalFont: {fileID: 0}
+      hoverFontSize: 28
+      hoverColor: {r: 1, g: 1, b: 1, a: 1}
+      hoverBold: 1
+      hoverFont: {fileID: 0}
+      selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+      disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+    backButtonStyle:
+      hoverOffset: 8
+      duration: 0.15
+      easing:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      normalFontSize: 30
+      normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+      normalBold: 0
+      normalFont: {fileID: 0}
+      hoverFontSize: 34
+      hoverColor: {r: 1, g: 1, b: 1, a: 1}
+      hoverBold: 1
+      hoverFont: {fileID: 0}
+      selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+      disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+    panelWidth: 900
+    panelHeight: 640
+    panelAnchoredPosition: {x: 0, y: 0}
+    padding: {x: 70, y: 55}
+    rowSpacing: 18
+    titleHeight: 90
+    labelHeight: 40
+    sliderHeight: 28
+    valueWidth: 110
+    optionWidth: 120
+    optionHeight: 54
+    optionSpacing: 12
+    backWidth: 240
+    backHeight: 60
+    backTopSpacing: 24
+    sliderBackground: {r: 0.16, g: 0.16, b: 0.16, a: 1}
+    sliderFill: {r: 1, g: 1, b: 1, a: 1}
+    sliderHandle: {r: 1, g: 1, b: 1, a: 1}
+  showChapterIntroOnNewGame: 1
+  showChapterIntroOnContinue: 1
+  showChapterIntroOnChapterSelect: 1
+  audio:
+    hoverSound: {fileID: 8300000, guid: 8ac0ee4e06b8bbd4e9039795d5f602b9, type: 3}
+    clickSound: {fileID: 8300000, guid: 4e03c42e14bc8374c9dfc2e26dfa25c5, type: 3}
+    volume: 0.45
+    enableHoverSound: 1
+    enableClickSound: 1
+    usePlaceholderSounds: 1

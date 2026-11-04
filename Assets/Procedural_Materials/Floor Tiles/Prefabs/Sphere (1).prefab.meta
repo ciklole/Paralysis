@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 23bf2bc122bf6e544811647142c22ac0
+timeCreated: 1493909023
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89777
+  packageName: Breakable Floor Tiles
+  packageVersion: 1.0
+  assetPath: Assets/Procedural_Materials/Floor Tiles/Prefabs/Sphere (1).prefab
+  uploadId: 178174

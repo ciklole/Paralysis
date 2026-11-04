@@ -1,0 +1,242 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ed2c3f7c943ca4c88d380ba90a6471, type: 3}
+  m_Name: CASHIER_Success_01
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
+  conversationId: CASHIER_Success_01
+  lockPlayerMovement: 1
+  lines:
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Salutations. Did you find everything you were looking for?
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 13f910d31cc596843881d3913d913039, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Indeed, I can confirm that I have obtained every item specified on the list.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 6a2400f745ac59642b4d6f056073f069, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Good. Let's get you checked out.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: d59e6f9d649c93a468554da7eaa557bf, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: You live around here?
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 77d92d2e76d764342a3fac820e0ba15f, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 1.5
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: 'Yeah. A few streets away. '
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 38d5d72a4a896d44ca078c0078271163, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Must be quiet at night.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 58faf76156403bc4487e3d7c014ef3cf, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Yeah, usually
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 215863fe608cef34ebc9ff2a4fedde00, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0.3660378, g: 0, b: 0, a: 1}
+    text: Not tonight?
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: cdd30dd9650fea247908dc56f0535564, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: What?
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 95a042feee95cc841be4c119cff846aa, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 1}
+    text: Nothing.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: f4dcdad9ad9c3a044a813423e83eb2c7, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0, g: 0, b: 0, a: 1}
+    text: You should get home soon.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: e0f2ac722d35d8143b816ed479ee8014, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0.8
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Why? Is something happening?
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 1a1963e0f253e0545b6cae450fd41762, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0.3433962, g: 0, b: 0, a: 1}
+    text: Streets get empty. People get lost. Some even die....
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: be36c7c8315a1764f8966f3b0de04906, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: That's... a weird way to put it.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 0fa470d7839ec844e8f1910e69ed1058, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: Cashier
+    speakerColor: {r: 0.24528301, g: 0, b: 0, a: 1}
+    text: Have a pleasant night.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 26a2afb1180644b459e9edb89aeb75d4, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 1
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []

@@ -1,0 +1,239 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8002c454bcb01474a8480dc50266d83e, type: 3}
+  m_Name: PauseMenuConfig
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenuConfig
+  pauseKey: 27
+  allowDuringModals: 0
+  leftWidthFraction: 0.42
+  leftPanelColor: {r: 0, g: 0, b: 0, a: 1}
+  rightDarkening: {r: 0, g: 0, b: 0, a: 0.62}
+  showTitle: 1
+  titleText: PAUSED
+  titleStyle:
+    font: {fileID: 0}
+    fontSize: 24
+    bold: 0
+    color: {r: 0.62, g: 0.62, b: 0.62, a: 1}
+    alignment: 3
+  titleOffset: {x: 120, y: 150}
+  titleSize: {x: 500, y: 50}
+  continueLabel: CONTINUE
+  settingsLabel: SETTINGS
+  replayLabel: REPLAY CHAPTER
+  mainMenuLabel: MAIN MENU
+  buttonTextStyle:
+    font: {fileID: 0}
+    fontSize: 40
+    bold: 0
+    color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    alignment: 3
+  buttonStyle:
+    hoverOffset: 9
+    duration: 0.16
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    normalFontSize: 40
+    normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+    normalBold: 0
+    normalFont: {fileID: 0}
+    hoverFontSize: 46
+    hoverColor: {r: 1, g: 1, b: 1, a: 1}
+    hoverBold: 1
+    hoverFont: {fileID: 0}
+    selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+    disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  buttonOffset: {x: 120, y: 320}
+  buttonSize: {x: 560, y: 70}
+  buttonSpacing: 24
+  settingsPanel:
+    showTitle: 1
+    titleText: SETTINGS
+    sensitivityLabel: MOUSE SENSITIVITY
+    frameRateLabel: FRAME RATE
+    backLabel: BACK
+    fpsFormat: '{0} FPS'
+    valueFormat: '{0}'
+    titleStyle:
+      font: {fileID: 0}
+      fontSize: 48
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 4
+    labelStyle:
+      font: {fileID: 0}
+      fontSize: 28
+      bold: 0
+      color: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+      alignment: 3
+    valueStyle:
+      font: {fileID: 0}
+      fontSize: 26
+      bold: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
+      alignment: 5
+    buttonTextStyle:
+      font: {fileID: 0}
+      fontSize: 26
+      bold: 0
+      color: {r: 0.62, g: 0.62, b: 0.62, a: 1}
+      alignment: 4
+    optionButtonStyle:
+      hoverOffset: 4
+      duration: 0.12
+      easing:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      normalFontSize: 26
+      normalColor: {r: 0.62, g: 0.62, b: 0.62, a: 1}
+      normalBold: 0
+      normalFont: {fileID: 0}
+      hoverFontSize: 28
+      hoverColor: {r: 1, g: 1, b: 1, a: 1}
+      hoverBold: 1
+      hoverFont: {fileID: 0}
+      selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+      disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+    backButtonStyle:
+      hoverOffset: 8
+      duration: 0.15
+      easing:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      normalFontSize: 30
+      normalColor: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+      normalBold: 0
+      normalFont: {fileID: 0}
+      hoverFontSize: 34
+      hoverColor: {r: 1, g: 1, b: 1, a: 1}
+      hoverBold: 1
+      hoverFont: {fileID: 0}
+      selectedColor: {r: 1, g: 0.84, b: 0.45, a: 1}
+      disabledColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+    panelWidth: 0
+    panelHeight: 0
+    panelAnchoredPosition: {x: 0, y: 0}
+    padding: {x: 120, y: 170}
+    rowSpacing: 18
+    titleHeight: 90
+    labelHeight: 40
+    sliderHeight: 28
+    valueWidth: 110
+    optionWidth: 120
+    optionHeight: 54
+    optionSpacing: 12
+    backWidth: 260
+    backHeight: 60
+    backTopSpacing: 26
+    sliderBackground: {r: 0.16, g: 0.16, b: 0.16, a: 1}
+    sliderFill: {r: 1, g: 1, b: 1, a: 1}
+    sliderHandle: {r: 1, g: 1, b: 1, a: 1}
+  openDuration: 0.34
+  closeDuration: 0.24
+  easing:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  contentSlide: 48
+  replayShowsChapterIntro: 1
+  audio:
+    hoverSound: {fileID: 0}
+    clickSound: {fileID: 0}
+    volume: 0.3
+    enableHoverSound: 1
+    enableClickSound: 1
+    usePlaceholderSounds: 1
+  canvasPrefab: {fileID: 1388718145019250713, guid: 75a442152f978074c90752668d7e5482, type: 3}

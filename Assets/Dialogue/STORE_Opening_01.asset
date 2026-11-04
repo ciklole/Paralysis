@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ed2c3f7c943ca4c88d380ba90a6471, type: 3}
+  m_Name: STORE_Opening_01
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
+  conversationId: STORE_Opening_01
+  lockPlayerMovement: 1
+  lines:
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: Alright. Let's see what we need.
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: 81aaa892f7ce1764691a2259ce8d9bcd, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: You
+    speakerColor: {r: 0, g: 0, b: 0, a: 0}
+    text: (Press M to Open The List)
+    portrait: {fileID: 0}
+    voiceClip: {fileID: 8300000, guid: dbd4ffea7c8c7b64e85fe160cd97593b, type: 3}
+    voiceVolume: 1
+    soundEffect: {fileID: 0}
+    delayBefore: 0
+    overrideTypewriter: 0
+    useTypewriter: 1
+    pauseAfter: 0.25
+    movementLock: 0
+    onLineFinished:
+      m_PersistentCalls:
+        m_Calls: []

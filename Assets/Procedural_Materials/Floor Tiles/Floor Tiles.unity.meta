@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ae3ee0a4b15803d4bad5daaa72cdf2c8
+timeCreated: 1493906856
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89777
+  packageName: Breakable Floor Tiles
+  packageVersion: 1.0
+  assetPath: Assets/Procedural_Materials/Floor Tiles/Floor Tiles.unity
+  uploadId: 178174

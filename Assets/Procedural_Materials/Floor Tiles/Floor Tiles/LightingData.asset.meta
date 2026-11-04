@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 86c404a5f0f57ec4da74fdfb40090410
+timeCreated: 1493909426
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89777
+  packageName: Breakable Floor Tiles
+  packageVersion: 1.0
+  assetPath: Assets/Procedural_Materials/Floor Tiles/Floor Tiles/LightingData.asset
+  uploadId: 178174
