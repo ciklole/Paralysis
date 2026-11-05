@@ -31,11 +31,11 @@ public class CarDriveScene : MonoBehaviour
     [SerializeField] private string returnFallbackScene = "City";
 
     [Header("Camera")]
-    [Tooltip("First person is the intended driving view. Third person keeps the orbit camera.")]
+    [Tooltip("Third person orbits behind the car. First person sits at the driver's eye point.")]
     [SerializeField] private CarCameraViewMode cameraView =
-        CarCameraViewMode.FirstPerson;
+        CarCameraViewMode.ThirdPerson;
 
-    [Tooltip("Use the shared mouse-sensitivity setting in first person.")]
+    [Tooltip("Use the shared mouse-sensitivity setting while driving.")]
     [SerializeField] private bool usePlayerMouseSensitivity = true;
 
     private void Awake()

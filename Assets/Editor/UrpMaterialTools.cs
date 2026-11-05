@@ -231,6 +231,10 @@ public static class UrpMaterialTools
                 StartMenuScreenshots();
                 break;
 
+            case "newshots":
+                StartFeatureScreenshots();
+                break;
+
             case "uishots":
                 StartHudScreenshots();
                 break;
@@ -720,6 +724,31 @@ public static class UrpMaterialTools
             "MainMenu|2|main_menu.png\n" +
             "Pause|3|pause_menu.png\n" +
             "ChapterIntro|2|chapter_intro.png\n"
+        );
+
+        EditorApplication.EnterPlaymode();
+    }
+
+    /// <summary>
+    /// Captures the main menu lightning strike and the third-person driving
+    /// camera. Results go to Logs/main_menu.png, Logs/menu_lightning.png
+    /// and Logs/car_third_person.png.
+    /// </summary>
+    [MenuItem("Paralysis/Setup/Capture Feature Screenshots")]
+    public static void StartFeatureScreenshots()
+    {
+        string request = Path.Combine(
+            ProjectRoot,
+            "Temp",
+            "paralysis_shot.request"
+        );
+
+        Directory.CreateDirectory(Path.GetDirectoryName(request));
+        File.WriteAllText(
+            request,
+            "MainMenu|3|main_menu.png\n" +
+            "MenuLightning|3|menu_lightning.png\n" +
+            "CarThirdPerson|4|car_third_person.png\n"
         );
 
         EditorApplication.EnterPlaymode();

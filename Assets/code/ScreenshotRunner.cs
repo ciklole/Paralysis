@@ -22,6 +22,8 @@ using UnityEngine.UI;
 ///   Dialogue|4|dialogue.png
 ///   HudToast|3|hud_toast.png
 ///   QuestLog|3|quest_log.png
+///   MenuLightning|3|menu_lightning.png
+///   CarThirdPerson|3|car_third_person.png
 ///
 /// The screenshots end up in the Logs folder.
 /// </summary>
@@ -201,6 +203,42 @@ public class ScreenshotRunner : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
 
             log.Close();
+            yield break;
+        }
+
+        if (string.Equals(
+                kind,
+                "MenuLightning",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            SceneManager.LoadScene("MainMenu");
+            yield return new WaitForSecondsRealtime(wait);
+
+            MainMenuLightningFlash flash =
+                FindAnyObjectByType<MainMenuLightningFlash>();
+
+            if (flash != null)
+            {
+                flash.TriggerFlash();
+                yield return new WaitForSecondsRealtime(0.12f);
+            }
+
+            Capture(job[2]);
+            yield return new WaitForSecondsRealtime(1f);
+            yield break;
+        }
+
+        if (string.Equals(
+                kind,
+                "CarThirdPerson",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            SceneManager.LoadScene("CarDriving");
+            yield return new WaitForSecondsRealtime(wait);
+            yield return new WaitForSecondsRealtime(2f);
+
+            Capture(job[2]);
+            yield return new WaitForSecondsRealtime(1f);
             yield break;
         }
 

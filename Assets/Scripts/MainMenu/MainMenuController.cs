@@ -62,6 +62,37 @@ public class MainMenuController : MonoBehaviour
 
         BuildUI();
         ShowMenu();
+        EnsureLightningFlash();
+    }
+
+    /// <summary>
+    /// Adds the occasional background lightning strike to the menu.
+    /// </summary>
+    private void EnsureLightningFlash()
+    {
+        MainMenuLightningFlash flash =
+            GetComponent<MainMenuLightningFlash>();
+
+        if (flash == null)
+            flash = gameObject.AddComponent<MainMenuLightningFlash>();
+
+        flash.SetBackground(ResolveBackgroundImage());
+    }
+
+    private Image ResolveBackgroundImage()
+    {
+        if (authoredView != null && authoredView.backgroundImage != null)
+            return authoredView.backgroundImage;
+
+        if (canvas == null)
+            return null;
+
+        Transform background = canvas.transform.Find("Background");
+
+        if (background == null)
+            return null;
+
+        return background.GetComponent<Image>();
     }
 
     private void ResolveConfig()

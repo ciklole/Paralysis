@@ -7,16 +7,16 @@ public enum CarCameraViewMode
 }
 
 /// <summary>
-/// Camera for the driving scene. The default first-person view sits at the
-/// driver's eye point and uses the same saved mouse sensitivity as the walking
-/// controller. Third-person orbit remains available in the Inspector.
+/// Camera for the driving scene. The default third-person view orbits behind
+/// the car and uses the same saved mouse sensitivity as the walking
+/// controller. First person stays available in the Inspector.
 /// </summary>
 public class CarCamera : MonoBehaviour
 {
     [Header("View")]
-    [Tooltip("First person is the intended driving view. Third person keeps the original orbit camera.")]
+    [Tooltip("Third person orbits behind the car. First person sits at the driver's eye point.")]
     [SerializeField] private CarCameraViewMode viewMode =
-        CarCameraViewMode.FirstPerson;
+        CarCameraViewMode.ThirdPerson;
 
     [Tooltip("Use the saved mouse sensitivity from the shared settings screen.")]
     [SerializeField] private bool usePlayerMouseSensitivity = true;
@@ -27,6 +27,8 @@ public class CarCamera : MonoBehaviour
     [SerializeField] private float firstPersonMinPitch = -55f;
     [SerializeField] private float firstPersonMaxPitch = 55f;
     [SerializeField] private float firstPersonStartPitch = 0f;
+
+    [SerializeField] private float thirdPersonSensitivityScale = 1f;
 
     [Tooltip("Hide the car body while in first person so the camera is not inside the mesh.")]
     [SerializeField] private bool hideCarInFirstPerson = true;
@@ -162,16 +164,20 @@ public class CarCamera : MonoBehaviour
 
         if (!UIState.BlocksGameplay)
         {
+            float sensitivity = usePlayerMouseSensitivity
+                ? GameSettings.MouseSensitivity * thirdPersonSensitivityScale
+                : mouseSensitivity;
+
             float mouseX = Input.GetAxis("Mouse X");
 
-            yawOffset += mouseX * mouseSensitivity;
+            yawOffset += mouseX * sensitivity;
             yawOffset = Mathf.Clamp(
                 yawOffset,
                 -maxYawOffset,
                 maxYawOffset
             );
 
-            pitch += Input.GetAxis("Mouse Y") * mouseSensitivity;
+            pitch += Input.GetAxis("Mouse Y") * sensitivity;
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
             if (Mathf.Abs(mouseX) < 0.01f)

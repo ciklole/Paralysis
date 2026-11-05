@@ -870,8 +870,8 @@ public class PlayModeSmokeTest : MonoBehaviour
         if (carCamera != null)
         {
             Check(
-                "driving uses the first-person camera",
-                carCamera.ViewMode == CarCameraViewMode.FirstPerson
+                "driving uses the third-person camera",
+                carCamera.ViewMode == CarCameraViewMode.ThirdPerson
             );
             Check(
                 "driving uses the shared mouse sensitivity",
@@ -880,6 +880,45 @@ public class PlayModeSmokeTest : MonoBehaviour
 
             Renderer[] carRenderers =
                 car.GetComponentsInChildren<Renderer>(true);
+
+            bool bodyVisible = false;
+
+            for (int i = 0; i < carRenderers.Length; i++)
+            {
+                if (carRenderers[i] != null && carRenderers[i].enabled)
+                    bodyVisible = true;
+            }
+
+            Check("third person shows the car body", bodyVisible);
+
+            // The orbit camera eases into place, so let it settle before
+            // reading where it ended up.
+            float settleDeadline = Time.realtimeSinceStartup + 2f;
+
+            while (Time.realtimeSinceStartup < settleDeadline)
+            {
+                Vector3 offset = carCamera.transform.position - car.position;
+
+                if (offset.y > 1f &&
+                    Vector3.Dot(offset, car.forward) < 0f)
+                {
+                    break;
+                }
+
+                yield return null;
+            }
+
+            Vector3 cameraOffset = carCamera.transform.position - car.position;
+
+            Check(
+                "third person camera sits behind the car",
+                cameraOffset.y > 1f &&
+                Vector3.Dot(cameraOffset, car.forward) < 0f
+            );
+
+            carCamera.SetViewMode(CarCameraViewMode.FirstPerson);
+            yield return null;
+
             bool bodyHidden = carRenderers.Length > 0;
 
             for (int i = 0; i < carRenderers.Length; i++)
@@ -900,7 +939,7 @@ public class PlayModeSmokeTest : MonoBehaviour
             carCamera.SetViewMode(CarCameraViewMode.ThirdPerson);
             yield return null;
 
-            bool bodyVisible = false;
+            bodyVisible = false;
 
             for (int i = 0; i < carRenderers.Length; i++)
             {
@@ -909,19 +948,6 @@ public class PlayModeSmokeTest : MonoBehaviour
             }
 
             Check("third person restores the car body", bodyVisible);
-
-            carCamera.SetViewMode(CarCameraViewMode.FirstPerson);
-            yield return null;
-
-            bodyHidden = carRenderers.Length > 0;
-
-            for (int i = 0; i < carRenderers.Length; i++)
-            {
-                if (carRenderers[i] != null && carRenderers[i].enabled)
-                    bodyHidden = false;
-            }
-
-            Check("first person hides the car body again", bodyHidden);
         }
 
         Rigidbody body = car.GetComponent<Rigidbody>();
