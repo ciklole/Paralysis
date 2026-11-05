@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3599de2bf2d53343b90c1b6a57e25e3, type: 3}
   m_Name: MainMenuConfig
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuConfig
-  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.63529414}
   backgroundSprite: {fileID: 0}
   showTitle: 1
   titleText: PARALYSIS
@@ -161,7 +161,7 @@ MonoBehaviour:
   chapterBackdrop: {r: 0, g: 0, b: 0, a: 0.72}
   chapterBackLabel: BACK
   chapterBackTextStyle:
-    font: {fileID: 0}
+    font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
     fontSize: 28
     bold: 0
     color: {r: 1, g: 0.57169807, b: 0.57169807, a: 1}
@@ -220,7 +220,7 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       alignment: 4
     labelStyle:
-      font: {fileID: 0}
+      font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
       fontSize: 28
       bold: 0
       color: {r: 0.72, g: 0.72, b: 0.72, a: 1}

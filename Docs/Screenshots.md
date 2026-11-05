@@ -57,6 +57,19 @@ This writes a request for Store, City, CarDriving and Home and captures each
 scene after a short wait. The output files are `store.png`, `city.png`,
 `car.png` and `home.png`.
 
+## Feature screenshots
+
+Editor menu: `Paralysis > Setup > Capture Feature Screenshots` (request command `newshots`)
+
+This captures the main menu with and without a lightning strike, plus the
+third-person driving camera:
+
+- `Logs/main_menu.png` - the MainMenu scene in its normal state.
+- `Logs/menu_lightning.png` - the main menu during a lightning strike, with
+  the background silhouette lit up.
+- `Logs/car_third_person.png` - the CarDriving scene from the third-person
+  camera.
+
 ## Request format
 
 `ScreenshotRunner` reads `Temp/paralysis_shot.request`. Each non-empty line is:
@@ -74,8 +87,11 @@ ChapterIntro|2|chapter_intro.png
 Dialogue|4|dialogue.png
 HudToast|3|hud_toast.png
 QuestLog|3|quest_log.png
+MenuLightning|3|menu_lightning.png
+CarThirdPerson|3|car_third_person.png
 ```
 
-The editor request `menushots` writes the three menu jobs above; `uishots`
-writes the three HUD jobs. The runner sets `Application.runInBackground = true`
-so the capture still runs when the editor is not focused.
+The editor requests `menushots` writes the three menu jobs above; `uishots`
+writes the three HUD jobs; `newshots` writes the feature jobs. The runner
+sets `Application.runInBackground = true` so the capture still runs when the
+editor is not focused.
