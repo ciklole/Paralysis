@@ -198,7 +198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: THANK YOU FOR PLAYING THE DEMO.
+  m_Text: "BUT ILL CONTINUE WORKING ON IT OUTSIDE OF CRESCENT\n\t\tTHANK YOU FOR PLAYING MY GAME"
 --- !u!1 &149692294
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: YOU MADE IT OUT.
+  m_Text: This is the end......... FOR NOW
 --- !u!1 &183738345
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,12 +907,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e53b5896f7ca14845a3e3d46768f20aa, type: 3}
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
     m_FontSize: 88
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 88
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1075,7 +1075,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: BUT THE STORE REMEMBERS YOU.
+  m_Text: 'BECAUSE CRESCENT IS ALMOST OVER, '
 --- !u!1 &1851074198
 GameObject:
   m_ObjectHideFlags: 0
