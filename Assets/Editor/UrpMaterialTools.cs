@@ -175,6 +175,10 @@ public static class UrpMaterialTools
                 CashierSequenceBuilder.Build();
                 break;
 
+            case "buildcity":
+                CityBuilder.BuildCity();
+                break;
+
             case "dumpcheckout":
                 CashierSequenceBuilder.DumpCheckout();
                 break;

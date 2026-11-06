@@ -33,6 +33,7 @@ Available commands:
 | `fixdefaults` | Fix built-in default materials |
 | `buildstore` | Rebuild the store scene - **destroys hand edits**, see below |
 | `buildcar` | Rebuild the driving destination |
+| `buildcity` | Place vrbn houses along the City streets and sync CarDriving |
 | `buildmenu` | Rebuild the main menu config assets |
 | `rebuildmenu` | Rebuild the MainMenu scene from scratch |
 | `buildauthoredui` | Rebuild the authored UI canvases |
