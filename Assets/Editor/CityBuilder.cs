@@ -11,6 +11,11 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Populates the authored City scene with houses from the vrbn USA set.
 ///
+/// The houses are the raw 3D models from each building's Meshes folder
+/// (Building_XXXXX_LOD_1.fbx). The ready-made prefabs in the same package keep
+/// only their LOD_3 billboard active, so they look flat; the FBX models are the
+/// actual 3D buildings the scene uses.
+///
 /// The street tiles come from ModularLowpolyStreetsFree. Each tile carries a
 /// mesh with the pavement, the border and the black driving surface. The black
 /// surface is measured from the actual triangles because the imported submesh
@@ -29,8 +34,8 @@ public static class CityBuilder
     const string LogDir = "Logs";
     const string ReportPath = LogDir + "/city_report.txt";
 
-    const string PrefabRoot =
-        "Assets/vrbn_studios/2023_A/USA/buildings/prefabs/";
+    const string BuildingRoot =
+        "Assets/vrbn_studios/2023_A/USA/buildings/";
 
     const string BlackRoadMaterial = "Road-1-line";
     const string PavementMaterial = "Pavement";
@@ -116,6 +121,7 @@ public static class CityBuilder
         // buildings root is a child of City, so it has to be searched for
         // below the scene roots as well.
         GameObject cityRoot = CleanPreviousHouses(scene);
+        ReplaceBlockFillers(scene);
 
         List<RoadTile> roads = CollectRoads(scene);
         List<Run> runs = BuildRuns(roads);
@@ -294,11 +300,15 @@ public static class CityBuilder
                         break;
                     }
 
+                    // The vrbn models have their pivot 3 units above the
+                    // ground, so lift the root by the model's local bottom.
+                    float baseY = run.groundY - house.localMin.y;
+
                     // The front face sits just inside the outer edge of the
                     // pavement, so the house touches the sidewalk.
                     Vector3 rootPos = run.axis == 0
-                        ? new Vector3(cursor - alongMin, run.groundY, edge)
-                        : new Vector3(edge, run.groundY, cursor - alongMin);
+                        ? new Vector3(cursor - alongMin, baseY, edge)
+                        : new Vector3(edge, baseY, cursor - alongMin);
 
                     rootPos += outward * (house.localMax.z - SidewalkTouch);
 
@@ -340,8 +350,8 @@ public static class CityBuilder
             }
         }
 
-        // Colliders first: the prefab assets are shared by every scene.
-        EnsurePrefabColliders();
+        // Every placed house is a raw model prefab instance, so the colliders
+        // are added to the scene instances.
         EnsureSceneColliders(scene);
 
         report.AppendLine();
@@ -398,6 +408,71 @@ public static class CityBuilder
         }
 
         return cityRoot;
+    }
+
+    /// <summary>
+    /// The 23 large B00024 block fillers were placed with the vrbn prefab,
+    /// which only shows its flat LOD_3 billboard. Replace each one with the 3D
+    /// LOD_1 model while keeping its name, parent and transform.
+    /// </summary>
+    static void ReplaceBlockFillers(Scene scene)
+    {
+        const string prefabSuffix = "/prefabs/B00024.prefab";
+        GameObject model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath("B00024"));
+
+        if (model == null)
+        {
+            return;
+        }
+
+        GameObject[] roots = scene.GetRootGameObjects();
+        List<Transform> old = new List<Transform>();
+
+        for (int i = 0; i < roots.Length; i++)
+        {
+            Transform[] all = roots[i].transform.GetComponentsInChildren<Transform>(true);
+
+            for (int c = 0; c < all.Length; c++)
+            {
+                if (!PrefabUtility.IsOutermostPrefabInstanceRoot(all[c].gameObject))
+                {
+                    continue;
+                }
+
+                string path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(
+                    all[c].gameObject);
+
+                if (!string.IsNullOrEmpty(path) &&
+                    path.Replace('\\', '/').EndsWith(prefabSuffix))
+                {
+                    old.Add(all[c]);
+                }
+            }
+        }
+
+        for (int i = 0; i < old.Count; i++)
+        {
+            Transform source = old[i];
+
+            if (source == null)
+            {
+                continue;
+            }
+
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(model);
+            instance.name = source.name;
+            instance.transform.SetParent(source.parent, true);
+            instance.transform.position = source.position;
+            instance.transform.rotation = source.rotation;
+            instance.transform.localScale = source.localScale;
+
+            UnityEngine.Object.DestroyImmediate(source.gameObject);
+        }
+
+        if (old.Count > 0)
+        {
+            Debug.Log("CityBuilder: replaced " + old.Count + " B00024 fillers with 3D models");
+        }
     }
 
     // ------------------------------------------------------------------
@@ -857,11 +932,12 @@ public static class CityBuilder
 
     static House LoadHouse(string name)
     {
-        string path = PrefabRoot + name + ".prefab";
+        string path = ModelPath(name);
         GameObject asset = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
         if (asset == null)
         {
+            Debug.LogWarning("CityBuilder: missing model " + path);
             return null;
         }
 
@@ -883,6 +959,13 @@ public static class CityBuilder
         house.width = total.size.x;
         house.depth = total.size.z;
         return house;
+    }
+
+    static string ModelPath(string name)
+    {
+        // Folders and files drop the leading B: B00009 -> Building_00009_LOD_1.fbx
+        string number = name.StartsWith("B", StringComparison.Ordinal) ? name.Substring(1) : name;
+        return BuildingRoot + name + "/Meshes/Building_" + number + "_LOD_1.fbx";
     }
 
     static House PickHouse(List<House> houses, ref int index, float maxWidth)
@@ -1024,33 +1107,7 @@ public static class CityBuilder
     // Colliders
     // ------------------------------------------------------------------
 
-    /// <summary>Adds a mesh collider to the LOD_0 meshes of every house prefab.</summary>
-    static void EnsurePrefabColliders()
-    {
-        for (int i = 0; i < BuildingPrefabs.Length; i++)
-        {
-            string path = PrefabRoot + BuildingPrefabs[i] + ".prefab";
-
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) == null)
-            {
-                continue;
-            }
-
-            GameObject root = PrefabUtility.LoadPrefabContents(path);
-            int added = AddColliders(root);
-            PrefabUtility.SaveAsPrefabAsset(root, path);
-            PrefabUtility.UnloadPrefabContents(root);
-
-            if (added > 0)
-            {
-                Debug.Log("CityBuilder: " + BuildingPrefabs[i] + " colliders +" + added);
-            }
-        }
-
-        AssetDatabase.SaveAssets();
-    }
-
-    /// <summary>Adds mesh colliders to the building instances already in the scene.</summary>
+    /// <summary>Adds mesh colliders to the building instances in the scene.</summary>
     static void EnsureSceneColliders(Scene scene)
     {
         GameObject[] roots = scene.GetRootGameObjects();
@@ -1074,12 +1131,15 @@ public static class CityBuilder
                     continue;
                 }
 
-                AddColliders(all[c].gameObject);
+                // Raw FBX models are single meshes; prefab instances have
+                // their own LOD children and only need the highest detail one.
+                bool model = path.EndsWith(".fbx", StringComparison.OrdinalIgnoreCase);
+                AddColliders(all[c].gameObject, model);
             }
         }
     }
 
-    static int AddColliders(GameObject root)
+    static int AddColliders(GameObject root, bool allLods)
     {
         MeshRenderer[] renderers = root.GetComponentsInChildren<MeshRenderer>(true);
         int added = 0;
@@ -1093,10 +1153,12 @@ public static class CityBuilder
                 continue;
             }
 
-            // Only the highest detail mesh needs a collider.
-            if (IsUnder(mr.transform, "LOD_1") ||
-                IsUnder(mr.transform, "LOD_2") ||
-                IsUnder(mr.transform, "LOD_3"))
+            // Only the highest detail mesh needs a collider when the source is
+            // a multi-LOD prefab.
+            if (!allLods &&
+                (IsUnder(mr.transform, "LOD_1") ||
+                 IsUnder(mr.transform, "LOD_2") ||
+                 IsUnder(mr.transform, "LOD_3")))
             {
                 continue;
             }
