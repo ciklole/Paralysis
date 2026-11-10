@@ -19,6 +19,100 @@ public static class CarDriveDestinationBuilder
     private const string MarkerMaterialPath =
         "Assets/Materials/Store/DestinationMarker.mat";
 
+    [MenuItem("Paralysis/Setup/Move Store Destination To Selected Object")]
+    public static void MoveToSelected()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            Debug.LogWarning(
+                "CarDriveDestinationBuilder: exit Play Mode before moving the " +
+                "destination."
+            );
+
+            return;
+        }
+
+        GameObject selected = Selection.activeGameObject;
+
+        if (selected == null)
+        {
+            Debug.LogWarning(
+                "CarDriveDestinationBuilder: select the object that marks the " +
+                "new destination first."
+            );
+
+            return;
+        }
+
+        Scene scene = selected.scene;
+
+        if (!scene.IsValid() ||
+            !string.Equals(
+                scene.path,
+                ScenePath,
+                System.StringComparison.OrdinalIgnoreCase
+            ))
+        {
+            Debug.LogWarning(
+                "CarDriveDestinationBuilder: select an object inside " + ScenePath + "."
+            );
+
+            return;
+        }
+
+        if (!MoveDestination(scene, selected.transform.position, selected.name))
+            return;
+
+        EditorSceneManager.SaveScene(scene, ScenePath);
+        AssetDatabase.SaveAssets();
+    }
+
+    /// <summary>
+    /// Batch-mode entry point. Set PARALYSIS_DESTINATION_TARGET to the name of
+    /// the object that marks the new destination before running this method.
+    /// </summary>
+    public static void MoveToObjectBatch()
+    {
+        string targetName = System.Environment.GetEnvironmentVariable(
+            "PARALYSIS_DESTINATION_TARGET"
+        );
+
+        if (string.IsNullOrEmpty(targetName))
+        {
+            Debug.LogError(
+                "CarDriveDestinationBuilder: set PARALYSIS_DESTINATION_TARGET to " +
+                "the name of the object that marks the new destination."
+            );
+
+            return;
+        }
+
+        Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+        Scene previous = SceneManager.GetActiveScene();
+        SceneManager.SetActiveScene(scene);
+
+        Transform target = FindTransform(scene, targetName);
+
+        if (target == null)
+        {
+            Debug.LogError(
+                "CarDriveDestinationBuilder: no object named '" + targetName +
+                "' in " + ScenePath
+            );
+
+            Restore(previous, scene);
+            return;
+        }
+
+        if (MoveDestination(scene, target.position, target.name))
+        {
+            EditorSceneManager.SaveScene(scene, ScenePath);
+            AssetDatabase.SaveAssets();
+        }
+
+        Restore(previous, scene);
+    }
+
     [MenuItem("Paralysis/Setup/Add Car Destination To Driving Scene")]
     public static void Build()
     {
@@ -127,6 +221,83 @@ public static class CarDriveDestinationBuilder
         }
 
         return null;
+    }
+
+    private static Transform FindTransform(Scene scene, string name)
+    {
+        GameObject[] roots = scene.GetRootGameObjects();
+
+        for (int i = 0; i < roots.Length; i++)
+        {
+            Transform[] all = roots[i].GetComponentsInChildren<Transform>(true);
+
+            for (int j = 0; j < all.Length; j++)
+            {
+                if (all[j].name == name)
+                    return all[j];
+            }
+        }
+
+        return null;
+    }
+
+    private static bool MoveDestination(
+        Scene scene,
+        Vector3 position,
+        string sourceName)
+    {
+        GameObject root = FindRoot(scene, "Store Destination");
+
+        if (root == null)
+        {
+            Debug.LogWarning(
+                "CarDriveDestinationBuilder: no Store Destination root found in " +
+                ScenePath
+            );
+
+            return false;
+        }
+
+        root.transform.position = position;
+
+        CarDriveDestination component =
+            root.GetComponent<CarDriveDestination>();
+
+        if (component != null)
+        {
+            SerializedObject serialized = new SerializedObject(component);
+            SetVector(serialized, "destinationPosition", position);
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        SnapChildren(root.transform);
+
+        EditorSceneManager.MarkSceneDirty(scene);
+
+        Debug.Log(
+            "CarDriveDestinationBuilder: moved Store Destination to " +
+            position.ToString("F2") + " (from " + sourceName + ")."
+        );
+
+        return true;
+    }
+
+    private static void SnapChildren(Transform root)
+    {
+        Transform marker = root.Find("Destination Marker");
+
+        if (marker != null)
+            marker.localPosition = new Vector3(0f, 0.06f, 0f);
+
+        Transform beam = root.Find("Destination Beam");
+
+        if (beam != null)
+            beam.localPosition = new Vector3(0f, 4f, 0f);
+
+        Transform sign = root.Find("Destination Sign");
+
+        if (sign != null)
+            sign.localPosition = new Vector3(0f, 3.2f, 0f);
     }
 
     private static Vector3 FindRoadPoint(Transform car)

@@ -42,26 +42,50 @@ public class CarDriveDestination : MonoBehaviour
 
     public Transform WatchedCar => FindCar();
 
-    public Vector3 DestinationPosition => destinationPosition == Vector3.zero
-        ? transform.position
-        : destinationPosition;
+    /// <summary>
+    /// World position of the arrival zone. The root transform is authoritative,
+    /// so moving the "Store Destination" object in the scene moves the trigger
+    /// point and every marker child together.
+    /// </summary>
+    public Vector3 DestinationPosition => transform.position;
 
     private void Start()
     {
-        if (destinationPosition == Vector3.zero)
-            destinationPosition = transform.position;
+        // Keep the serialized value in sync for older scenes and inspector
+        // tooling. The transform is what the trigger actually uses.
+        destinationPosition = transform.position;
 
-        // Make the visible marker match the actual trigger point even if the
-        // marker was moved by hand in the scene.
+        // Make the visible marker match the trigger point even if a child was
+        // moved by hand in an older version of the scene.
+        SnapMarkerChildren();
+    }
+
+    private void SnapMarkerChildren()
+    {
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
 
-            if (child != null && child.name.IndexOf(
+            if (child == null)
+                continue;
+
+            if (child.name.IndexOf(
                     "Marker",
                     System.StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                child.position = DestinationPosition;
+                child.localPosition = new Vector3(0f, 0.06f, 0f);
+            }
+            else if (child.name.IndexOf(
+                    "Beam",
+                    System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                child.localPosition = new Vector3(0f, 4f, 0f);
+            }
+            else if (child.name.IndexOf(
+                    "Sign",
+                    System.StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                child.localPosition = new Vector3(0f, 3.2f, 0f);
             }
         }
     }
