@@ -6,18 +6,23 @@ using System.Text;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Copies the City environment into the CarDriving scene without touching the
-/// driving-only objects (car, walking player, camera, destination and the
-/// CarDriveSystems root). The default action is a dry run; applying the sync
-/// requires an explicit confirmation.
+/// Copies the environment between the City and CarDriving scenes.
+///
+/// The forward direction (City -> CarDriving) copies the authored City
+/// environment into the driving scene without touching the driving-only
+/// objects (car, walking player, camera, destination and the CarDriveSystems
+/// root). The reverse direction (CarDriving -> City) copies the driving
+/// scene's environment, lighting and fog back into City while preserving
+/// City's player and story managers.
 ///
 /// The sync uses EditorSceneManager.MergeScenes instead of recreating objects
 /// by hand. That keeps prefab instances, overrides, materials and internal
-/// references exactly as they are in the City scene. The source City scene is
-/// opened additively and is never saved, so City.unity is not modified.
+/// references exactly as they are in the source scene. The source scene is
+/// opened additively and is never saved, so it is not modified.
 /// </summary>
 public static class DrivingSceneSyncTool
 {
@@ -91,6 +96,43 @@ public static class DrivingSceneSyncTool
         Sync(true, CityPath, DrivingPath, true, false);
     }
 
+    [MenuItem("Paralysis/Scenes/Driving Sync/Apply CarDriving -> City")]
+    public static void ApplyReverseSync()
+    {
+        if (EditorApplication.isPlaying)
+        {
+            EditorUtility.DisplayDialog(
+                "Driving Sync",
+                "Exit Play Mode before syncing scenes.",
+                "OK"
+            );
+
+            return;
+        }
+
+        if (!EditorUtility.DisplayDialog(
+                "Apply CarDriving -> City",
+                "This replaces the environment objects in City with the " +
+                "current CarDriving environment, including the lighting and " +
+                "fog settings. The City player and story managers are " +
+                "preserved.\n\n" +
+                "CarDriving.unity itself is not modified. Continue?",
+                "Apply",
+                "Cancel"))
+        {
+            return;
+        }
+
+        Sync(true, DrivingPath, CityPath, true, false, true);
+    }
+
+    /// <summary>Batch-mode entry point for the reverse sync.</summary>
+    public static void ApplyReverseSyncBatch()
+    {
+        bool applied = Sync(true, DrivingPath, CityPath, false, true, true);
+        Debug.Log("DrivingSceneSyncTool: reverse sync applied=" + applied);
+    }
+
     [MenuItem("Paralysis/Scenes/Dump City and CarDriving Hierarchy")]
     public static void DumpHierarchy()
     {
@@ -146,7 +188,8 @@ public static class DrivingSceneSyncTool
         string cityPath,
         string drivingPath,
         bool activateTarget,
-        bool closeTarget)
+        bool closeTarget,
+        bool copySceneSettings = false)
     {
         if (EditorApplication.isPlaying)
         {
@@ -224,22 +267,30 @@ public static class DrivingSceneSyncTool
 
         StringBuilder report = new StringBuilder();
 
-        report.AppendLine("City -> CarDriving environment sync");
+        report.AppendLine(copySceneSettings
+            ? "CarDriving -> City environment sync"
+            : "City -> CarDriving environment sync");
         report.AppendLine("Generated " + DateTime.Now.ToString("u"));
         report.AppendLine("Mode: " + (apply ? "APPLY" : "DRY RUN"));
         report.AppendLine("City: " + cityPath);
         report.AppendLine("Driving: " + drivingPath);
         report.AppendLine();
 
-        report.AppendLine("Preserved driving roots:");
+        report.AppendLine(copySceneSettings
+            ? "Preserved City roots:"
+            : "Preserved driving roots:");
         AppendNames(report, protectedRoots, "  ");
         report.AppendLine();
 
-        report.AppendLine("City environment roots:");
+        report.AppendLine(copySceneSettings
+            ? "CarDriving environment roots:"
+            : "City environment roots:");
         AppendNames(report, sourceEnvironment, "  ");
         report.AppendLine();
 
-        report.AppendLine("CarDriving environment roots (will be replaced):");
+        report.AppendLine(copySceneSettings
+            ? "City environment roots (will be replaced):"
+            : "CarDriving environment roots (will be replaced):");
         AppendNames(report, environmentRoots, "  ");
         report.AppendLine();
 
@@ -255,6 +306,9 @@ public static class DrivingSceneSyncTool
 
             return true;
         }
+
+        if (copySceneSettings)
+            CopyRenderSettings(city, driving);
 
         // Remove the old environment. Driving-only roots are never touched.
         for (int i = 0; i < environmentRoots.Count; i++)
@@ -459,6 +513,68 @@ public static class DrivingSceneSyncTool
     {
         if (original.IsValid() && original.isLoaded)
             SceneManager.SetActiveScene(original);
+    }
+
+    /// <summary>
+    /// Copies the per-scene render settings (fog, ambient light, skybox and
+    /// reflection settings) from one loaded scene to another. RenderSettings
+    /// belongs to the active scene, so the active scene is switched while the
+    /// values are read and written.
+    /// </summary>
+    private static void CopyRenderSettings(Scene source, Scene target)
+    {
+        Scene previous = SceneManager.GetActiveScene();
+
+        SceneManager.SetActiveScene(source);
+
+        bool fog = RenderSettings.fog;
+        Color fogColor = RenderSettings.fogColor;
+        FogMode fogMode = RenderSettings.fogMode;
+        float fogDensity = RenderSettings.fogDensity;
+        float fogStart = RenderSettings.fogStartDistance;
+        float fogEnd = RenderSettings.fogEndDistance;
+        AmbientMode ambientMode = RenderSettings.ambientMode;
+        Color ambientSky = RenderSettings.ambientSkyColor;
+        Color ambientEquator = RenderSettings.ambientEquatorColor;
+        Color ambientGround = RenderSettings.ambientGroundColor;
+        float ambientIntensity = RenderSettings.ambientIntensity;
+        Color subtractiveShadow = RenderSettings.subtractiveShadowColor;
+        Material skybox = RenderSettings.skybox;
+        Light sun = RenderSettings.sun;
+        float haloStrength = RenderSettings.haloStrength;
+        float flareStrength = RenderSettings.flareStrength;
+        float flareFadeSpeed = RenderSettings.flareFadeSpeed;
+        DefaultReflectionMode reflectionMode = RenderSettings.defaultReflectionMode;
+        int reflectionResolution = RenderSettings.defaultReflectionResolution;
+        int reflectionBounces = RenderSettings.reflectionBounces;
+        float reflectionIntensity = RenderSettings.reflectionIntensity;
+
+        SceneManager.SetActiveScene(target);
+
+        RenderSettings.fog = fog;
+        RenderSettings.fogColor = fogColor;
+        RenderSettings.fogMode = fogMode;
+        RenderSettings.fogDensity = fogDensity;
+        RenderSettings.fogStartDistance = fogStart;
+        RenderSettings.fogEndDistance = fogEnd;
+        RenderSettings.ambientMode = ambientMode;
+        RenderSettings.ambientSkyColor = ambientSky;
+        RenderSettings.ambientEquatorColor = ambientEquator;
+        RenderSettings.ambientGroundColor = ambientGround;
+        RenderSettings.ambientIntensity = ambientIntensity;
+        RenderSettings.subtractiveShadowColor = subtractiveShadow;
+        RenderSettings.skybox = skybox;
+        RenderSettings.sun = sun;
+        RenderSettings.haloStrength = haloStrength;
+        RenderSettings.flareStrength = flareStrength;
+        RenderSettings.flareFadeSpeed = flareFadeSpeed;
+        RenderSettings.defaultReflectionMode = reflectionMode;
+        RenderSettings.defaultReflectionResolution = reflectionResolution;
+        RenderSettings.reflectionBounces = reflectionBounces;
+        RenderSettings.reflectionIntensity = reflectionIntensity;
+
+        if (previous.IsValid() && previous.isLoaded)
+            SceneManager.SetActiveScene(previous);
     }
 
     private static List<GameObject> CollectProtectedRoots(Scene scene)
