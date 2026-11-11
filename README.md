@@ -470,6 +470,9 @@ Third-party art, environment, character, music, and sound packs are included und
 - Music Atmosphere Horror
 - Sounds
 
-Special thanks to everyone who playtested the demo and reported issues.
+Special thanks to everyone who helped me with the game, playtested the demo and reported issues.
+Those are: Pinyuan Chen, who tested my game, and gave me a review out of 10 (he said 0 cuz it scared him so much); and Paya, who helped me with the idea for this game. 
+I did use AI, however, it was only for debugging as this game had so many bugs i couldn't count them all.
 
-I used AI just to code.
+Thank you for reading this README.
+You will be able to play the game from the https://ciklole.itch.io/paralysis
