@@ -14,7 +14,6 @@ A short first-person horror story about a late-night grocery run that should hav
 - [Controls](#controls)
 - [Game systems](#game-systems)
 - [Project architecture](#project-architecture)
-- [Settings](#settings)
 - [Credits](#credits)
 
 ---
@@ -293,17 +292,6 @@ VSync and the FPS cap are intentionally mutually exclusive so the two settings c
 - The main menu camera is left untouched to preserve the title screen's authored look.
 - Turning the option off restores each camera's original `renderPostProcessing` value.
 
-### Settings file
-
-Settings are saved to:
-
-```
-%USERPROFILE%/AppData/LocalLow/<company>/<product>/Paralysis/settings.json
-```
-
-On Windows, the exact path is shown by `Application.persistentDataPath`. Deleting `settings.json` resets all graphics options to their defaults on the next launch.
-
----
 
 ## Setup
 
@@ -330,7 +318,7 @@ On Windows, the exact path is shown by `Application.persistentDataPath`. Deletin
 
 ## Credits
 
-**PARALYSIS** is a solo narrative horror demo. Game, story, design, and direction by me, Serali. With some inspiration from his friends
+**PARALYSIS** is a solo narrative horror demo. Game, story, design, and direction by me, Serali. With some inspiration from my friends
 
 Built with:
 
