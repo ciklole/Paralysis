@@ -301,7 +301,7 @@ VSync and the FPS cap are intentionally mutually exclusive so the two settings c
 
 
 ### Open the project
-**Play through Itch.io website I wrote underneath or**
+**Play through downloading the game through Releases**
 1. Clone the repository.
 2. Open the folder with Unity Hub using Unity `6000.7.0a6`.
 3. Let Unity import the packages and assets. The first import can take several minutes because the project includes large environment and character packs.
@@ -353,4 +353,4 @@ Those are: Pinyuan Chen, who tested my game, and gave me a review out of 10 (he 
 I did use AI, however, it was only for debugging as this game had so many bugs i couldn't count them all.
 
 Thank you for reading this README.
-You will be able to play the game from the https://ciklole.itch.io/paralysis
+You will be able to play the game from the Releases 
