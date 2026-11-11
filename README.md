@@ -15,9 +15,6 @@ A short first-person horror story about a late-night grocery run that should hav
 - [Game systems](#game-systems)
 - [Project architecture](#project-architecture)
 - [Settings](#settings)
-- [Setup](#setup)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
 - [Credits](#credits)
 
 ---
@@ -312,33 +309,16 @@ On Windows, the exact path is shown by `Application.persistentDataPath`. Deletin
 
 ### Requirements
 
-- **Unity 6000.7.0a6** (Unity 6.7 Alpha) with the Windows, Mac, or Linux build support module.
-- **Universal Render Pipeline (URP) 17.7.0** — the project is already configured for URP.
-- A display that supports the resolution you want to test. The editor uses the Game view size, not the full list of desktop modes.
+-Strong PC/Laptop that can handle the game easily
 
-HDRP is present in the package cache but is **not** the active pipeline. Do not switch the project to HDRP; the materials and scenes are authored for URP.
 
 ### Open the project
-
+**Play through Itch.io website I wrote underneath or**
 1. Clone the repository.
 2. Open the folder with Unity Hub using Unity `6000.7.0a6`.
 3. Let Unity import the packages and assets. The first import can take several minutes because the project includes large environment and character packs.
 4. Open `Assets/Scenes/MainMenu.unity`.
 5. Press Play.
-
-### Build
-
-1. Open **File > Build Settings**.
-2. Confirm the scene list contains, in order:
-   - `Assets/Scenes/MainMenu.unity`
-   - `Assets/Scenes/Home.unity`
-   - `Assets/Scenes/City.unity`
-   - `Assets/Scenes/CarDriving.unity`
-   - `Assets/Scenes/Store.unity`
-   - `Assets/Scenes/End.unity`
-3. Select the target platform and build.
-
-The project uses the legacy Input Manager axes (`Horizontal`, `Vertical`, `Mouse X`, `Mouse Y`). If input does not work in a fresh clone, check **Project Settings > Player > Active Input Handling** and set it to **Both** or **Input Manager (Old)**.
 
 ### Recommended player settings
 
@@ -348,99 +328,9 @@ The project uses the legacy Input Manager axes (`Horizontal`, `Vertical`, `Mouse
 
 ---
 
-## Testing
-
-### Play-mode smoke test
-
-The project includes an automated play-mode acceptance test that exercises the real scenes, UI, story flow, driving, shopping, settings, and ending.
-
-Batch command (Windows):
-
-```powershell
-& "C:\Program Files\Unity\Hub\Editor\6000.7.0a6\Editor\Unity.exe" `
-  -batchmode -nographics `
-  -projectPath "C:\Users\super\Paralysis" `
-  -executeMethod SmokeTestRunner.Run `
-  -paralysisSmoke `
-  -logFile "C:\Users\super\Paralysis\Temp\smoke.log"
-```
-
-Results are written to `Logs/smoke_results.txt`. The current suite covers:
-
-- Main menu, chapter select, settings, pause, loading, and chapter intro.
-- Home opening dialogue, light switches, inspection, and player locking.
-- City, car entry, driving camera, navigation guide, destination glow, and arrival.
-- Store opening, groceries, cart, checkout, cashier transformation, and ending.
-- VSync/FPS interaction, motion-blur toggling and camera restoration, resolution confirmation/revert/persistence, and settings-row layout in both menus.
-- Duplicate-manager and single-audio-listener checks.
-
-The test temporarily moves the real settings and progress files aside and restores them at the end.
-
-### Editor tools
-
-- `Paralysis > Scenes > Driving Sync > Dry Run (report only)` — compare City and CarDriving without saving.
-- `Paralysis > Scenes > Driving Sync > Apply City -> CarDriving` — apply the environment sync.
-- `Paralysis > Scenes > Driving Sync > Apply CarDriving -> City` — reverse sync when the driving scene is the source.
-- `Paralysis > Setup > Add Car Destination To Driving Scene` — add or rebuild the driving destination marker.
-- `Paralysis > Setup > Move Store Destination To Selected Object` — move the destination root to the selected scene object.
-- `ScreenshotRunner` — request-file driven screenshots for UI and scene checks.
-
----
-
-## Troubleshooting
-
-### Pink materials
-
-Pink means a material is using a shader that is not available in the active render pipeline.
-
-1. Confirm the project is using URP, not HDRP.
-2. Reimport the affected material or the whole `Assets` folder.
-3. Check that the URP asset is assigned in **Project Settings > Graphics** and **Project Settings > Quality**.
-
-### No audio
-
-- Check that exactly one `AudioListener` exists in the active scene. The smoke test verifies this.
-- Check the Windows/macOS volume mixer and the Unity Game view mute button.
-- The music database may intentionally have a missing clip; the console logs a warning and continues.
-
-### Resolution prompt is hard to read
-
-The prompt is designed to be readable at small resolutions, but if the display cannot show it, wait 15 seconds and it will revert automatically. You can also press `Esc` to revert immediately. If the game is stuck at an unusable mode, delete `settings.json` and relaunch.
-
-### The game starts at the wrong resolution
-
-Resolution changes are only saved after confirmation. If an unsupported mode was saved by an older build, the game falls back automatically. To force a reset, delete `settings.json`.
-
-### A scene is missing
-
-Open **File > Build Settings** and confirm all six scenes are present and enabled. `StoryDirector` logs an error if a configured scene is not in Build Settings.
-
-### The car does not move
-
-- Click the Game view to give it focus.
-- Use `W`/`S` for throttle and reverse; `A`/`D` only steer.
-- Check that the car's wheel colliders are assigned in `CarDriveController`.
-- In the editor, make sure the driving scene was not left in a paused state (`Time.timeScale` should be 1).
-
-### The navigation arrow is missing
-
-- The guide only appears after the driving intro delay.
-- It hides when the destination is within 16 meters, after arrival, or when the `drive_to_store` objective is complete.
-- If the arrow never appears, confirm `CarDriveDestination` exists in `CarDriving` and that `CarDriveScene` created the guide.
-
-### Settings rows overlap in the main menu
-
-The MainMenu settings host is a fixed 900 × 640 panel and uses a compact row layout. The PauseMenu host is stretched and uses normal spacing. If a custom scene changes the host size, check `SettingsPanel.ApplyCompactLayoutIfNeeded()` and the `SettingsPanelConfig` spacing values.
-
-### Unity version warnings
-
-Use Unity `6000.7.0a6`. Opening the project in a different major version can upgrade scenes, prefabs, and materials in ways that are not backward compatible. Commit or back up the project before upgrading.
-
----
-
 ## Credits
 
-**PARALYSIS** is a solo narrative horror demo. Game, story, design, and direction by Ciklole.
+**PARALYSIS** is a solo narrative horror demo. Game, story, design, and direction by me, Serali. With some inspiration from his friends
 
 Built with:
 
