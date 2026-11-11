@@ -57,9 +57,13 @@ Shader "Paralysis/InteractionOutline"
                 float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
 
                 float3 normalVS = TransformWorldToViewDir(normalWS, true);
-                float2 offset = TransformViewToProjection(normalVS.xy).xy;
 
-                float4 positionCS = TransformWViewToHClip(positionWS);
+                // Project the view-space normal with the projection matrix.
+                // TransformViewToProjection is a built-in-pipeline helper and
+                // is not defined by URP, which broke the WebGL/GLES3 build.
+                float2 offset = mul((float2x2)UNITY_MATRIX_P, normalVS.xy);
+
+                float4 positionCS = TransformWorldToHClip(positionWS);
 
                 // Expand along the normal in view space, then convert that
                 // direction to a screen-space offset. This keeps the outline
