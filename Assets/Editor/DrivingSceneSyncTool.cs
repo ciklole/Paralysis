@@ -126,6 +126,13 @@ public static class DrivingSceneSyncTool
         Sync(true, DrivingPath, CityPath, true, false, true);
     }
 
+    /// <summary>Batch-mode entry point for the forward sync.</summary>
+    public static void ApplySyncBatch()
+    {
+        bool applied = Sync(true, CityPath, DrivingPath, false, true);
+        Debug.Log("DrivingSceneSyncTool: forward sync applied=" + applied);
+    }
+
     /// <summary>Batch-mode entry point for the reverse sync.</summary>
     public static void ApplyReverseSyncBatch()
     {
@@ -307,8 +314,10 @@ public static class DrivingSceneSyncTool
             return true;
         }
 
-        if (copySceneSettings)
-            CopyRenderSettings(city, driving);
+        // The source scene is authoritative for both directions. Copy the
+        // RenderSettings so lighting, skybox and fog always travel with the
+        // environment, even when the object lists already match.
+        CopyRenderSettings(city, driving);
 
         // Remove the old environment. Driving-only roots are never touched.
         for (int i = 0; i < environmentRoots.Count; i++)

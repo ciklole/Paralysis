@@ -13,6 +13,11 @@ public class SettingsPanelConfig
     public string titleText = "SETTINGS";
     public string sensitivityLabel = "MOUSE SENSITIVITY";
     public string frameRateLabel = "FRAME RATE";
+    public string vsyncLabel = "VERTICAL SYNC";
+    public string resolutionLabel = "RESOLUTION";
+    public string motionBlurLabel = "MOTION BLUR";
+    public string onLabel = "ON";
+    public string offLabel = "OFF";
     public string backLabel = "BACK";
     public string fpsFormat = "{0} FPS";
     public string valueFormat = "{0}";
@@ -87,6 +92,11 @@ public class SettingsPanelConfig
     public float optionWidth = 120f;
     public float optionHeight = 54f;
     public float optionSpacing = 12f;
+    public float compactRowHeight = 44f;
+    public float compactControlWidth = 300f;
+    public float compactButtonWidth = 84f;
+    public float compactButtonSpacing = 10f;
+    public float compactArrowWidth = 42f;
     public float backWidth = 240f;
     public float backHeight = 60f;
     public float backTopSpacing = 24f;

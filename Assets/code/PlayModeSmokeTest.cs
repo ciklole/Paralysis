@@ -6,6 +6,7 @@ using System.Text;
 using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -809,6 +810,11 @@ public class PlayModeSmokeTest : MonoBehaviour
 
     private IEnumerator DrivingTest()
     {
+        // The driving scene is the most motion-heavy part of the game. Force
+        // the effect on so the check is deterministic even if the player's
+        // saved preference is off; MenuTest restores the real file later.
+        GameSettings.SetMotionBlur(true, false);
+
         ResetStory();
 
         SceneManager.LoadScene("CarDriving");
@@ -856,6 +862,104 @@ public class PlayModeSmokeTest : MonoBehaviour
             FindAnyObjectByType<CarDriveDestination>();
 
         Check("store destination exists", destination != null);
+
+        if (destination != null)
+        {
+            Renderer marker = null;
+            Transform markerTransform =
+                destination.transform.Find("Destination Marker");
+
+            if (markerTransform != null)
+                marker = markerTransform.GetComponent<Renderer>();
+
+            Check(
+                "destination glow light exists",
+                destination.GlowEnabled &&
+                destination.GlowLight != null &&
+                destination.GlowLight.type == LightType.Point
+            );
+            Check(
+                "destination glow stays local",
+                destination.GlowLight != null &&
+                destination.GlowLight.range <= 60f &&
+                destination.GlowLight.shadows == LightShadows.None
+            );
+            Check(
+                "destination marker is emissive",
+                marker != null &&
+                marker.material.IsKeywordEnabled("_EMISSION") &&
+                marker.material.GetColor("_EmissionColor").maxColorComponent >
+                    0.1f
+            );
+        }
+
+        CarNavigationGuide guide =
+            FindAnyObjectByType<CarNavigationGuide>();
+
+        Check("navigation guide exists", guide != null);
+        Check(
+            "navigation guide tracks the destination and car",
+            guide != null &&
+            guide.HasDestination &&
+            guide.TrackedCar != null
+        );
+        Check(
+            "navigation guide is not duplicated",
+            FindObjectsByType<CarNavigationGuide>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None).Length == 1
+        );
+        Check(
+            "navigation guide has a screen canvas",
+            guide != null && guide.NavigationCanvas != null
+        );
+
+        // Let the fade-in and the first LateUpdate pass run.
+        yield return new WaitForSecondsRealtime(0.75f);
+
+        Check(
+            "navigation guide is visible while driving",
+            guide != null && guide.DisplayAlpha > 0.1f
+        );
+        Check(
+            "motion blur is active while driving",
+            GameSettings.MotionBlurEnabled &&
+            MotionBlurController.IsActive &&
+            MotionBlurController.HasVolume
+        );
+
+        if (carCamera != null)
+        {
+            UniversalAdditionalCameraData cameraData =
+                carCamera.GetComponent<UniversalAdditionalCameraData>();
+
+            Check(
+                "driving camera renders post-processing",
+                cameraData != null && cameraData.renderPostProcessing
+            );
+
+            // Turning the option off must restore the camera's authored
+            // post-processing state, not leave the driving camera altered.
+            GameSettings.SetMotionBlur(false, false);
+            yield return null;
+
+            Check(
+                "motion blur off restores the camera",
+                !MotionBlurController.IsActive &&
+                cameraData != null &&
+                !cameraData.renderPostProcessing
+            );
+
+            GameSettings.SetMotionBlur(true, false);
+            yield return null;
+
+            Check(
+                "motion blur on restores the camera post-processing",
+                MotionBlurController.IsActive &&
+                cameraData != null &&
+                cameraData.renderPostProcessing
+            );
+        }
 
         if (destination == null || controller == null)
             yield break;
@@ -1352,6 +1456,212 @@ public class PlayModeSmokeTest : MonoBehaviour
             (GameSettings.FrameRate == 240 && fps240 != null && fps240.Selected)
         );
 
+        Transform vsyncRow = FindTransform(settingsHost, "VSyncRow");
+        Transform resolutionRow = FindTransform(
+            settingsHost,
+            "ResolutionRow"
+        );
+        Transform motionBlurRow = FindTransform(
+            settingsHost,
+            "MotionBlurRow"
+        );
+
+        Check("VSync row exists", vsyncRow != null);
+        Check("resolution row exists", resolutionRow != null);
+        Check("motion blur row exists", motionBlurRow != null);
+
+        MenuButton vsyncOn = FindMenuButton(vsyncRow, "ON");
+        MenuButton vsyncOff = FindMenuButton(vsyncRow, "OFF");
+        MenuButton blurOn = FindMenuButton(motionBlurRow, "ON");
+        MenuButton blurOff = FindMenuButton(motionBlurRow, "OFF");
+        MenuButton resolutionPrev = FindMenuButton(resolutionRow, "<");
+        MenuButton resolutionNext = FindMenuButton(resolutionRow, ">");
+        Text resolutionValue = FindText(resolutionRow, "ResolutionValue");
+
+        Check(
+            "graphics controls use readable labels",
+            vsyncOn != null && vsyncOff != null &&
+            blurOn != null && blurOff != null &&
+            resolutionPrev != null && resolutionNext != null
+        );
+        Check(
+            "resolution value is shown",
+            resolutionValue != null &&
+            resolutionValue.text == GameSettings.FormatResolution(
+                GameSettings.ResolutionWidth,
+                GameSettings.ResolutionHeight)
+        );
+
+        Canvas.ForceUpdateCanvases();
+
+        Check(
+            "graphics rows fit inside the settings panel",
+            RowInside(settingsHost, vsyncRow) &&
+            RowInside(settingsHost, resolutionRow) &&
+            RowInside(settingsHost, motionBlurRow)
+        );
+
+        if (vsyncOn != null && vsyncOff != null)
+        {
+            vsyncOn.Activate();
+            yield return null;
+
+            Check(
+                "VSync on disables the frame-rate cap",
+                GameSettings.VSyncEnabled &&
+                QualitySettings.vSyncCount == 1 &&
+                Application.targetFrameRate == -1
+            );
+            Check(
+                "VSync on is selected",
+                vsyncOn.Selected && !vsyncOff.Selected
+            );
+
+            vsyncOff.Activate();
+            yield return null;
+
+            Check(
+                "VSync off restores the frame-rate cap",
+                !GameSettings.VSyncEnabled &&
+                QualitySettings.vSyncCount == 0 &&
+                Application.targetFrameRate == GameSettings.FrameRate
+            );
+        }
+
+        if (blurOn != null && blurOff != null)
+        {
+            blurOff.Activate();
+            yield return null;
+
+            Check(
+                "motion blur off disables the effect",
+                !GameSettings.MotionBlurEnabled &&
+                !MotionBlurController.IsActive
+            );
+            Check(
+                "motion blur off is selected",
+                blurOff.Selected && !blurOn.Selected
+            );
+
+            blurOn.Activate();
+            yield return null;
+
+            Check(
+                "motion blur on enables the effect",
+                GameSettings.MotionBlurEnabled &&
+                MotionBlurController.IsActive &&
+                MotionBlurController.HasVolume
+            );
+        }
+
+        Check(
+            "resolution options are available",
+            GameSettings.ResolutionOptions.Count > 0
+        );
+
+        bool resolutionsCapped = true;
+
+        for (int i = 0; i < GameSettings.ResolutionOptions.Count; i++)
+        {
+            Vector2Int option = GameSettings.ResolutionOptions[i];
+
+            if (option.x > 3840 || option.y > 2160)
+                resolutionsCapped = false;
+        }
+
+        Check("resolution options are capped at 4K", resolutionsCapped);
+
+        int resolutionBeforeWidth = GameSettings.ResolutionWidth;
+        int resolutionBeforeHeight = GameSettings.ResolutionHeight;
+
+        if (resolutionNext != null && resolutionBeforeWidth > 0)
+        {
+            if (GameSettings.ResolutionOptions.Count > 1)
+                resolutionNext.Activate();
+            else
+                GameSettings.BeginResolutionChange(
+                    resolutionBeforeWidth,
+                    resolutionBeforeHeight);
+
+            yield return null;
+
+            Transform guardCanvas = FindTransform(
+                "ResolutionConfirmCanvas"
+            );
+
+            Check(
+                "resolution change asks for confirmation",
+                ResolutionGuard.Pending &&
+                guardCanvas != null &&
+                guardCanvas.gameObject.activeInHierarchy
+            );
+            Check(
+                "resolution guard knows the requested mode",
+                ResolutionGuard.PendingWidth ==
+                    GameSettings.ResolutionWidth &&
+                ResolutionGuard.PendingHeight ==
+                    GameSettings.ResolutionHeight
+            );
+
+            int requestedWidth = ResolutionGuard.PendingWidth;
+            int requestedHeight = ResolutionGuard.PendingHeight;
+
+            ResolutionGuard.Confirm();
+            yield return null;
+
+            Check(
+                "resolution confirmation applies the mode",
+                !ResolutionGuard.Pending &&
+                GameSettings.ResolutionWidth == requestedWidth &&
+                GameSettings.ResolutionHeight == requestedHeight
+            );
+
+            GameSettings.Reload();
+
+            Check(
+                "resolution persists after confirmation",
+                GameSettings.ResolutionWidth == requestedWidth &&
+                GameSettings.ResolutionHeight == requestedHeight
+            );
+
+            // Reverting must put the previous mode back and close the prompt.
+            // The timeout path uses the same Revert() call, so this also
+            // covers the automatic fallback after the countdown.
+            if (GameSettings.BeginResolutionChange(
+                    requestedWidth,
+                    requestedHeight))
+            {
+                Check(
+                    "resolution revert asks for confirmation",
+                    ResolutionGuard.Pending
+                );
+
+                ResolutionGuard.Revert();
+                yield return null;
+
+                Check(
+                    "resolution revert restores the previous mode",
+                    !ResolutionGuard.Pending &&
+                    GameSettings.ResolutionWidth == requestedWidth &&
+                    GameSettings.ResolutionHeight == requestedHeight
+                );
+            }
+
+            // Restore the mode the test started with so the rest of the
+            // suite runs at the same size.
+            if (resolutionBeforeWidth != requestedWidth ||
+                resolutionBeforeHeight != requestedHeight)
+            {
+                if (GameSettings.BeginResolutionChange(
+                        resolutionBeforeWidth,
+                        resolutionBeforeHeight))
+                {
+                    ResolutionGuard.Confirm();
+                    yield return null;
+                }
+            }
+        }
+
         float testSensitivity = GameSettings.MouseSensitivity;
 
         if (slider != null)
@@ -1603,6 +1913,42 @@ public class PlayModeSmokeTest : MonoBehaviour
             pausePanel.IsOpen &&
             pausePanel.SensitivitySlider != null
         );
+
+        Transform pauseVsyncRow = FindTransform(pauseSettingsHost, "VSyncRow");
+        Transform pauseResolutionRow = FindTransform(
+            pauseSettingsHost,
+            "ResolutionRow"
+        );
+        Transform pauseBlurRow = FindTransform(
+            pauseSettingsHost,
+            "MotionBlurRow"
+        );
+
+        Check(
+            "pause settings shows the graphics rows",
+            pauseVsyncRow != null &&
+            pauseResolutionRow != null &&
+            pauseBlurRow != null
+        );
+        Check(
+            "pause graphics controls use readable labels",
+            FindMenuButton(pauseVsyncRow, "ON") != null &&
+            FindMenuButton(pauseVsyncRow, "OFF") != null &&
+            FindMenuButton(pauseBlurRow, "ON") != null &&
+            FindMenuButton(pauseBlurRow, "OFF") != null &&
+            FindMenuButton(pauseResolutionRow, "<") != null &&
+            FindMenuButton(pauseResolutionRow, ">") != null
+        );
+
+        Canvas.ForceUpdateCanvases();
+
+        Check(
+            "pause graphics rows fit inside the panel",
+            RowInside(pauseSettingsHost, pauseVsyncRow) &&
+            RowInside(pauseSettingsHost, pauseResolutionRow) &&
+            RowInside(pauseSettingsHost, pauseBlurRow)
+        );
+
         Check(
             "pause stays frozen in settings",
             Mathf.Approximately(Time.timeScale, 0f) && pause.IsOpen
@@ -2590,6 +2936,27 @@ public class PlayModeSmokeTest : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Finds a child by name inside one panel. Several settings panels can
+    /// exist at once (the persistent pause menu plus the current menu), so
+    /// layout checks must not pick a row from the hidden one.
+    /// </summary>
+    private static Transform FindTransform(Transform root, string name)
+    {
+        if (root == null)
+            return null;
+
+        Transform[] transforms = root.GetComponentsInChildren<Transform>(true);
+
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            if (transforms[i] != null && transforms[i].name == name)
+                return transforms[i];
+        }
+
+        return null;
+    }
+
     private static MenuButton FindMenuButton(Transform root, string label)
     {
         MenuButton[] buttons = root != null
@@ -2616,6 +2983,55 @@ public class PlayModeSmokeTest : MonoBehaviour
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Checks that a layout row's world-space rectangle stays inside its host
+    /// panel. Used to catch the settings rows overflowing a fixed-size panel.
+    /// </summary>
+    private static bool RowInside(Transform host, Transform row)
+    {
+        if (host == null || row == null)
+            return false;
+
+        RectTransform hostRect = host as RectTransform;
+        RectTransform rowRect = row as RectTransform;
+
+        if (hostRect == null || rowRect == null)
+            return false;
+
+        Vector3[] hostCorners = new Vector3[4];
+        Vector3[] rowCorners = new Vector3[4];
+
+        hostRect.GetWorldCorners(hostCorners);
+        rowRect.GetWorldCorners(rowCorners);
+
+        const float tolerance = 1f;
+
+        bool inside =
+            rowCorners[0].x >= hostCorners[0].x - tolerance &&
+            rowCorners[0].y >= hostCorners[0].y - tolerance &&
+            rowCorners[2].x <= hostCorners[2].x + tolerance &&
+            rowCorners[2].y <= hostCorners[2].y + tolerance;
+
+        if (!inside)
+        {
+            Debug.LogWarning(
+                "SMOKE: row '" + row.name + "' outside host '" +
+                host.name + "'. host=" + FormatCorners(hostCorners) +
+                " row=" + FormatCorners(rowCorners)
+            );
+        }
+
+        return inside;
+    }
+
+    private static string FormatCorners(Vector3[] corners)
+    {
+        return "[" + corners[0].x.ToString("F1") + "," +
+               corners[0].y.ToString("F1") + " .. " +
+               corners[2].x.ToString("F1") + "," +
+               corners[2].y.ToString("F1") + "]";
     }
 
     private static Text FindText(Transform root, string name)

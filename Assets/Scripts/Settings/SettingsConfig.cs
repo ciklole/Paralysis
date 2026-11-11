@@ -22,8 +22,37 @@ public class SettingsConfig : ScriptableObject
     public int[] frameRateOptions = { 60, 120, 240 };
     public int defaultFrameRate = 60;
 
-    [Tooltip("Sets QualitySettings.vSyncCount to 0 so the FPS cap is used.")]
-    public bool disableVSync = true;
+    [Tooltip(
+        "Turn VSync on by default. When VSync is on the FPS cap is disabled " +
+        "and the display refresh rate becomes the limit.")]
+    public bool defaultVSync = false;
+
+    [Header("Resolution")]
+    [Tooltip("Highest width offered in the resolution selector.")]
+    public int maxResolutionWidth = 3840;
+
+    [Tooltip("Highest height offered in the resolution selector.")]
+    public int maxResolutionHeight = 2160;
+
+    [Tooltip("Lowest width offered in the resolution selector.")]
+    public int minResolutionWidth = 1024;
+
+    [Tooltip("Lowest height offered in the resolution selector.")]
+    public int minResolutionHeight = 600;
+
+    [Tooltip(
+        "Seconds the player has to confirm a new resolution before it " +
+        "reverts automatically.")]
+    public float resolutionConfirmTimeout = 15f;
+
+    [Header("Motion Blur")]
+    public bool defaultMotionBlur = true;
+
+    [Range(0f, 1f)]
+    public float motionBlurIntensity = 0.35f;
+
+    [Range(0f, 0.2f)]
+    public float motionBlurClamp = 0.075f;
 
     [Header("Persistence")]
     public string settingsFileName = "settings.json";
@@ -52,6 +81,18 @@ public class SettingsConfig : ScriptableObject
             : frameRateOptions[0];
     }
 
+    public int MaxResolutionWidth =>
+        Mathf.Max(640, maxResolutionWidth > 0 ? maxResolutionWidth : 3840);
+
+    public int MaxResolutionHeight =>
+        Mathf.Max(360, maxResolutionHeight > 0 ? maxResolutionHeight : 2160);
+
+    public int MinResolutionWidth =>
+        Mathf.Clamp(minResolutionWidth, 320, MaxResolutionWidth);
+
+    public int MinResolutionHeight =>
+        Mathf.Clamp(minResolutionHeight, 240, MaxResolutionHeight);
+
     private void OnValidate()
     {
         if (maxMouseSensitivity < minMouseSensitivity)
@@ -73,5 +114,23 @@ public class SettingsConfig : ScriptableObject
             if (frameRateOptions[i] <= 0)
                 frameRateOptions[i] = 60;
         }
+
+        if (maxResolutionWidth <= 0)
+            maxResolutionWidth = 3840;
+
+        if (maxResolutionHeight <= 0)
+            maxResolutionHeight = 2160;
+
+        if (minResolutionWidth <= 0)
+            minResolutionWidth = 1024;
+
+        if (minResolutionHeight <= 0)
+            minResolutionHeight = 600;
+
+        if (resolutionConfirmTimeout < 5f)
+            resolutionConfirmTimeout = 5f;
+
+        motionBlurIntensity = Mathf.Clamp01(motionBlurIntensity);
+        motionBlurClamp = Mathf.Clamp(motionBlurClamp, 0f, 0.2f);
     }
 }

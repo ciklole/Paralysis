@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -33,6 +34,30 @@ public class CarDriveDestination : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onArrived;
 
+    [Header("Destination Glow")]
+    [Tooltip("Makes the marker and beam readable in the dark without raising the scene lighting.")]
+    [SerializeField] private bool enableGlow = true;
+
+    [SerializeField] private Color glowColor =
+        new Color(0.35f, 1f, 0.55f, 1f);
+
+    [Tooltip("Point-light intensity at the arrival marker.")]
+    [SerializeField] private float glowLightIntensity = 2.4f;
+
+    [Tooltip("Point-light range. Keep this local so the rest of the city stays dark.")]
+    [SerializeField] private float glowLightRange = 38f;
+
+    [Tooltip("Emission multiplier for the marker and beam materials.")]
+    [SerializeField] private float glowEmissionIntensity = 2.2f;
+
+    [Tooltip("How quickly the glow breathes.")]
+    [SerializeField] private float glowPulseSpeed = 1.3f;
+
+    private readonly List<Material> glowMaterials =
+        new List<Material>();
+
+    private Light glowLight;
+    private float glowBaseIntensity;
     private bool triggered;
 
     /// <summary>Diagnostic state for the smoke test and scene tools.</summary>
@@ -41,6 +66,12 @@ public class CarDriveDestination : MonoBehaviour
     public bool HasTriggered => triggered;
 
     public Transform WatchedCar => FindCar();
+
+    public bool GlowEnabled => enableGlow;
+
+    public Light GlowLight => glowLight;
+
+    public int GlowMaterialCount => glowMaterials.Count;
 
     /// <summary>
     /// World position of the arrival zone. The root transform is authoritative,
@@ -58,6 +89,101 @@ public class CarDriveDestination : MonoBehaviour
         // Make the visible marker match the trigger point even if a child was
         // moved by hand in an older version of the scene.
         SnapMarkerChildren();
+        SetupGlow();
+    }
+
+    /// <summary>
+    /// Adds a small emissive boost and one local point light. The environment
+    /// itself is untouched, so the destination reads as a landmark without
+    /// lifting the darkness of the whole city.
+    /// </summary>
+    private void SetupGlow()
+    {
+        if (!enableGlow)
+            return;
+
+        Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            Renderer renderer = renderers[i];
+
+            if (renderer == null)
+                continue;
+
+            string objectName = renderer.gameObject.name;
+
+            bool isMarker =
+                objectName.IndexOf(
+                    "Marker",
+                    System.StringComparison.OrdinalIgnoreCase) >= 0;
+
+            bool isBeam =
+                objectName.IndexOf(
+                    "Beam",
+                    System.StringComparison.OrdinalIgnoreCase) >= 0;
+
+            if (!isMarker && !isBeam)
+                continue;
+
+            Material[] materials = renderer.materials;
+
+            for (int m = 0; m < materials.Length; m++)
+            {
+                Material material = materials[m];
+
+                if (material == null ||
+                    !material.HasProperty("_EmissionColor"))
+                {
+                    continue;
+                }
+
+                material.EnableKeyword("_EMISSION");
+                material.globalIlluminationFlags =
+                    MaterialGlobalIlluminationFlags.RealtimeIndirectEmission;
+
+                material.SetColor(
+                    "_EmissionColor",
+                    glowColor * glowEmissionIntensity
+                );
+
+                glowMaterials.Add(material);
+            }
+        }
+
+        GameObject lightObject = new GameObject("Destination Glow Light");
+        lightObject.transform.SetParent(transform, false);
+        lightObject.transform.localPosition = new Vector3(0f, 2.2f, 0f);
+
+        glowLight = lightObject.AddComponent<Light>();
+        glowLight.type = LightType.Point;
+        glowLight.color = glowColor;
+        glowLight.range = glowLightRange;
+        glowLight.intensity = glowLightIntensity;
+        glowLight.shadows = LightShadows.None;
+        glowLight.renderMode = LightRenderMode.ForcePixel;
+
+        glowBaseIntensity = glowLightIntensity;
+    }
+
+    private void UpdateGlow()
+    {
+        if (!enableGlow || glowBaseIntensity <= 0f)
+            return;
+
+        float pulse = 0.86f +
+                      0.14f * Mathf.Sin(Time.time * glowPulseSpeed);
+
+        if (glowLight != null)
+            glowLight.intensity = glowBaseIntensity * pulse;
+
+        Color emission = glowColor * (glowEmissionIntensity * pulse);
+
+        for (int i = 0; i < glowMaterials.Count; i++)
+        {
+            if (glowMaterials[i] != null)
+                glowMaterials[i].SetColor("_EmissionColor", emission);
+        }
     }
 
     private void SnapMarkerChildren()
@@ -94,6 +220,8 @@ public class CarDriveDestination : MonoBehaviour
     {
         if (triggered)
             return;
+
+        UpdateGlow();
 
         Transform car = FindCar();
 

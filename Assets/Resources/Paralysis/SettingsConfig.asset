@@ -18,5 +18,13 @@ MonoBehaviour:
   sensitivityDecimals: 1
   frameRateOptions: 3c00000078000000f0000000i
   defaultFrameRate: 60
-  disableVSync: 1
+  defaultVSync: 0
+  maxResolutionWidth: 3840
+  maxResolutionHeight: 2160
+  minResolutionWidth: 1024
+  minResolutionHeight: 600
+  resolutionConfirmTimeout: 15
+  defaultMotionBlur: 1
+  motionBlurIntensity: 0.35
+  motionBlurClamp: 0.075
   settingsFileName: settings.json

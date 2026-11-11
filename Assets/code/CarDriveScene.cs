@@ -90,6 +90,15 @@ public class CarDriveScene : MonoBehaviour
         CreateCamera(driveRoot);
         SetObjective();
 
+        // A small screen-space compass that follows the existing destination
+        // marker. It is separate from the objective HUD so the driving view
+        // stays readable in the dark.
+        CarNavigationGuide guide = CarNavigationGuide.Ensure();
+        guide.Configure(
+            driveRoot,
+            FindAnyObjectByType<CarDriveDestination>()
+        );
+
         // The store scene uses this flag to know the drive objective was
         // reached by car, not by walking into the store.
         if (StoryDirector.Instance != null)
