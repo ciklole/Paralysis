@@ -1,0 +1,9 @@
+End scene already exists; left untouched.
+Build Settings order:
+  [0] Assets/Scenes/MainMenu.unity
+  [1] Assets/Scenes/Home.unity
+  [2] Assets/Scenes/City.unity
+  [3] Assets/Scenes/CarDriving.unity
+  [4] Assets/Scenes/Store.unity
+  [5] Assets/Scenes/End.unity
+Done.

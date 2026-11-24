@@ -1,0 +1,9 @@
+Built MainMenu Canvas.
+Pause prefab: Assets/Resources/Paralysis/PauseMenu.prefab
+Dialogue prefab: Assets/Resources/Paralysis/DialogueCanvas.prefab
+Transition prefab: Assets/Resources/Paralysis/TransitionCanvas.prefab
+Objective prefab: Assets/Resources/Paralysis/ObjectiveCanvas.prefab
+Toast prefab: Assets/Resources/Paralysis/ToastCanvas.prefab
+Quest log prefab: Assets/Resources/Paralysis/QuestLogCanvas.prefab
+MainMenu Canvas: Assets/Scenes/MainMenu.unity
+Done.

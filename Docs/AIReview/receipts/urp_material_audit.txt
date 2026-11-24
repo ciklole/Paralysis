@@ -1,0 +1,20 @@
+=== Assets/Scenes/Home.unity (0 incompatible) ===
+=== Assets/Scenes/City.unity (0 incompatible) ===
+=== Assets/Scenes/CarDriving.unity (0 incompatible) ===
+=== Assets/Scenes/Store.unity (0 incompatible) ===
+
+=== shader usage in the story scenes ===
+  170  Shader Graphs/Volum Light
+  130  Shader Graphs/vrbnMetRoughAlphaEmissionLOD_1_plus_URP
+  92  Shader Graphs/vrbnMetRoughAlphaEmissionURP
+  46  Shader Graphs/vrbnMetRoughDecalsURP
+  88  Shader Graphs/vrbnMetRoughTransparentURP
+  460  Shader Graphs/vrbnMetRoughURP
+  1020  Universal Render Pipeline/Complex Lit
+  801  Universal Render Pipeline/Lit
+  1196  vrbnInteriorMappingURP
+
+=== incompatible materials ===
+
+renderers checked: 1922
+incompatible materials: 0

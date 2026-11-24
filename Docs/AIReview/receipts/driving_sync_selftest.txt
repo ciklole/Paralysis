@@ -1,0 +1,11 @@
+City -> CarDriving sync self-test
+Generated 2026-10-25 21:45:39Z
+
+PASS  sync applies to a copy
+  CarDriveSystems: 1 (ok)
+  Store Destination: 1 (ok)
+  StoryManagers: 1 (ok)
+  FirstPersonController: 1 (ok)
+  Free Racing Car: 1 (ok)
+PASS  each driving root exists exactly once
+PASS  environment root count is 27 (expected 27)

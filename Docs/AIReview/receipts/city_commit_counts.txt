@@ -1,0 +1,86 @@
+PER-COMMIT PREFAB COUNTS FOR THE CITY AND CARDRIVING SCENES
+==============================================================================
+
+Every line below is produced by reading the committed .unity file and
+counting the m_SourcePrefab entries, then resolving each source GUID
+against the .meta files in Assets/ to see which prefab it is.
+Reproduce any row with:
+
+    git show <commit>:Assets/Scenes/City.unity
+
+commit     scene               GameObjects   prefabInstances  breakdown
+------------------------------------------------------------------------------
+63f8b1f    City.unity                   17               110  roads=40 streetlights=43 vrbn_buildings=24 racing_car=1 bench=1 other=1
+63f8b1f    CarDriving.unity             24               110  roads=40 streetlights=43 vrbn_buildings=24 racing_car=1 bench=1 other=1
+
+327d543    City.unity                   28               124  roads=40 streetlights=43 vrbn_buildings=38 racing_car=1 bench=1 other=1
+327d543    CarDriving.unity             24               110  roads=40 streetlights=43 vrbn_buildings=24 racing_car=1 bench=1 other=1
+
+a2e8101    City.unity                   35               143  roads=40 streetlights=43 vrbn_buildings=57 racing_car=1 bench=1 other=1
+a2e8101    CarDriving.unity             42               143  roads=40 streetlights=43 vrbn_buildings=57 racing_car=1 bench=1 other=1
+
+25a1e9b    City.unity                   65               143  roads=40 streetlights=43 vrbn_buildings=57 racing_car=1 bench=1 other=1
+25a1e9b    CarDriving.unity             72               143  roads=40 streetlights=43 vrbn_buildings=57 racing_car=1 bench=1 other=1
+
+2859562    City.unity                   81               165  roads=40 streetlights=49 vrbn_buildings=73 racing_car=1 bench=1 other=1
+2859562    CarDriving.unity             88               165  roads=40 streetlights=49 vrbn_buildings=73 racing_car=1 bench=1 other=1
+
+4ff1cca    City.unity                   87               251  roads=40 streetlights=129 vrbn_buildings=79 racing_car=1 bench=1 other=1
+4ff1cca    CarDriving.unity             94               251  roads=40 streetlights=129 vrbn_buildings=79 racing_car=1 bench=1 other=1
+
+HEAD       City.unity                   87               251  roads=40 streetlights=129 vrbn_buildings=79 racing_car=1 bench=1 other=1
+HEAD       CarDriving.unity             94               251  roads=40 streetlights=129 vrbn_buildings=79 racing_car=1 bench=1 other=1
+
+HOW TO READ THIS
+------------------------------------------------------------------------------
+
+63f8b1f (Nov 4, 15:03) is the bulk project upload. The city in it is
+what I had already built in the editor: 40 road pieces, 43 street
+lights, 24 vrbn buildings, the racing car and the bench. The agent had
+never run the city builder at this point.
+
+327d543 (Nov 4, 17:24) adds 14 more buildings to City only, by hand in
+the editor, with mesh colliders on them. CarDriving is untouched.
+
+a2e8101 (Nov 5, 21:14) is CityBuilder.BuildCity. It placed 19 house
+prefabs (B00004.prefab, B00009.prefab, B00274.prefab and so on) and
+then synced the driving scene, so both scenes jump to the same counts.
+Its own log line is: CityBuilder: placed 19 houses (saved=True)
+
+25a1e9b (Nov 7, 15:04) replaces those 19 prefab instances with direct
+LOD_1 mesh references (Building_00024_LOD_1.fbx and friends). Same
+count, different model. That happened after I sent a screenshot on
+Nov 7 telling it the first attempt had used the flat prefabs instead of
+the real 3D building meshes.
+
+2859562 (Nov 10, 09:01) is DrivingSceneSyncTool.ApplyReverseSyncBatch.
+I had edited CarDriving myself (16 more LOD_1 buildings, 6 more street
+lights, lighting and fog) and asked the agent to copy it into City.
+The copy is why the two scenes match again from here on.
+
+4ff1cca (Nov 10, 18:17) adds 80 more street lights and 6 more buildings
+that I placed by hand in the City editor that afternoon, and then the
+agent ran DrivingSceneSyncTool.ApplySyncBatch to copy City into
+CarDriving, which is why both scenes show the same numbers again.
+
+The +80 street lights are named V Cone LiT (48) through V Cone LiT (127),
+which is the naming Unity gives when you duplicate a light in the
+editor. They are not in any grid pattern, they sit in pairs on both
+sides of the pavement at irregular intervals.
+
+CHECKING A ROW YOURSELF
+------------------------------------------------------------------------------
+
+    git show 63f8b1f:Assets/Scenes/City.unity > a.txt
+    git show a2e8101:Assets/Scenes/City.unity > b.txt
+    (Select-String -Path a.txt,b.txt -Pattern 'm_SourcePrefab' | Measure-Object).Count
+
+or, to see which prefab each instance points at:
+
+    git show 4ff1cca:Assets/Scenes/City.unity |
+      Select-String -Pattern 'm_SourcePrefab' | Measure-Object
+
+To list the vrbn building models referenced by a commit:
+
+    git show 4ff1cca:Assets/Scenes/City.unity |
+      Select-String -Pattern 'Building_\d+_LOD_\d+' | Sort-Object -Unique

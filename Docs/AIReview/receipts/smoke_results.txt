@@ -1,0 +1,304 @@
+=== Paralysis play-mode smoke test ===
+Unity 6000.7.0a6
+
+--- HOME ---
+PASS  active scene is Home
+PASS  player exists
+PASS  camera exists
+PASS  StoryDirector exists
+PASS  Home has no pink materials
+PASS  DialogueSystem exists
+PASS  opening dialogue is showing
+PASS  opening dialogue finished
+PASS  ObjectiveManager exists
+PASS  turn_off_lights objective active
+PASS  LightsObjective exists
+PASS  light switches exist
+PASS  inspectable objects exist
+PASS  player unlocked before inspection
+PASS  inspection started
+PASS  player locked while inspecting
+PASS  inspection ended
+PASS  player unlocked after inspection
+
+--- STORE ---
+PASS  active scene is Store
+PASS  player exists
+PASS  camera exists
+PASS  StoryDirector exists
+PASS  StoryDirector store scene is Store
+PASS  single audio listener
+PASS  Store has no pink materials
+PASS  objective HUD uses authored canvas
+PASS  instruction toast uses authored canvas
+PASS  quest log uses authored canvas
+PASS  dialogue lines have voice tracks
+PASS  all UI text uses the electronic font
+PASS  ShoppingCart exists
+PASS  cart requires bread
+PASS  cart requires milk
+PASS  cart requires eggs
+  active grocery items: 14 (Tomato, Banana, Banana, bread, Banana, Banana, Banana, Banana, eggs, Banana, Banana, Banana, Banana, milk)
+PASS  three grocery items exist
+PASS  collect_groceries objective active
+PASS  cashier exists before shopping
+PASS  incomplete checkout opens the list
+PASS  incomplete checkout does not complete
+PASS  incomplete checkout releases input
+PASS  cart is complete
+PASS  collect_groceries completed
+PASS  pay_groceries objective active
+PASS  cashier exists
+PASS  cashier lighting controller exists
+PASS  cashier monster approach exists
+PASS  cashier checkout completed
+PASS  cashier monster reached the camera
+PASS  cashier monster came close to the player
+PASS  pay_groceries completed
+PASS  cashier sequence unlocks the player
+PASS  cashier sequence releases its modal
+PASS  cashier lighting is restored
+PASS  cashier restores every light property
+PASS  cashier restores the monster transform
+PASS  cashier hides the transformed model
+PASS  cashier checkout cannot run twice
+PASS  no modal blocks pause after checkout
+PASS  pause opens after checkout
+PASS  single event system after checkout
+PASS  event system has an input module
+  pause raycast top: Continue
+PASS  pause CONTINUE is hittable after checkout
+PASS  pause CONTINUE click resumes after checkout
+PASS  cashier reset clears completion
+PASS  cashier reset unlocks the player
+PASS  cashier reset restores lighting
+PASS  cashier reset restores the monster
+PASS  cashier sequence locks the player
+PASS  interrupted cashier unlocks the player
+PASS  interrupted cashier restores the camera
+PASS  interrupted cashier restores lighting
+PASS  interrupted cashier restores the monster
+PASS  interrupted cashier hides the transformed model
+PASS  interrupted cashier brings the normal cashier back
+
+--- DRIVING ---
+PASS  active scene is CarDriving
+PASS  driving session active
+PASS  car controller exists
+PASS  car camera exists
+PASS  single audio listener
+PASS  walking interaction suspended
+PASS  CarDriving has no pink materials
+PASS  store destination exists
+PASS  destination glow light exists
+PASS  destination glow stays local
+PASS  destination marker is emissive
+PASS  navigation guide exists
+PASS  navigation guide tracks the destination and car
+PASS  navigation guide is not duplicated
+PASS  navigation guide has a screen canvas
+PASS  navigation guide is visible while driving
+PASS  motion blur is active while driving
+PASS  driving camera renders post-processing
+PASS  motion blur off restores the camera
+PASS  motion blur on restores the camera post-processing
+PASS  car root found
+PASS  driving uses the third-person camera
+PASS  driving uses the shared mouse sensitivity
+PASS  third person shows the car body
+PASS  third person camera sits behind the car
+PASS  first person hides the car body
+PASS  first person camera sits at the driver
+PASS  third person restores the car body
+PASS  destination loads Store
+PASS  driving session cleared
+PASS  walking interaction resumed
+PASS  drive_to_store completed
+PASS  second driving session active
+PASS  exit request accepted
+PASS  exit returns to City
+PASS  player exists after exit
+PASS  city car exists after exit
+PASS  walking interaction resumed after exit
+PASS  City has no pink materials
+PASS  player returned beside the car
+
+--- MAIN MENU ---
+PASS  active scene is MainMenu
+PASS  main menu controller exists
+PASS  main menu shows the title
+PASS  menu title uses the placeholder font
+PASS  menu title is protected from the electronic font
+PASS  main menu has five buttons
+PASS  main menu button labels are correct
+PASS  main menu buttons use the electronic font
+PASS  main menu buttons have invisible hitboxes
+PASS  continue is disabled without progress
+PASS  continue explains the missing save
+PASS  new game button exists
+PASS  main menu keeps the authored label size
+PASS  menu hover enlarges, brightens and bolds
+PASS  menu hover returns smoothly
+PASS  chapter screen opens
+PASS  chapter screen lists configured chapters
+PASS  chapter list uses the electronic font
+PASS  chapter buttons keep the authored label size
+PASS  development mode unlocks every chapter
+PASS  chapter labels use configured titles
+PASS  chapter back button exists
+PASS  chapter back returns to the main menu
+PASS  settings screen opens
+PASS  settings reuses the shared panel
+PASS  sensitivity slider uses the configured range
+PASS  sensitivity slider starts at the saved value
+PASS  frame rate options are 60/120/240
+PASS  current frame rate is selected
+PASS  VSync row exists
+PASS  resolution row exists
+PASS  motion blur row exists
+PASS  graphics controls use readable labels
+PASS  resolution value is shown
+PASS  graphics rows fit inside the settings panel
+PASS  VSync on disables the frame-rate cap
+PASS  VSync on is selected
+PASS  VSync off restores the frame-rate cap
+PASS  motion blur off disables the effect
+PASS  motion blur off is selected
+PASS  motion blur on enables the effect
+PASS  resolution options are available
+PASS  resolution options are capped at 4K
+PASS  resolution change asks for confirmation
+PASS  resolution guard knows the requested mode
+PASS  resolution confirmation applies the mode
+PASS  resolution persists after confirmation
+PASS  resolution revert asks for confirmation
+PASS  resolution revert restores the previous mode
+PASS  sensitivity applies immediately
+PASS  frame rate applies immediately
+PASS  frame rate selection is visible
+PASS  settings back button exists
+PASS  settings back returns to the main menu
+PASS  settings are persisted separately
+PASS  chapter database has a first chapter
+PASS  continue becomes available with progress
+PASS  continue hides the no-save hint
+PASS  continue is disabled after progress is cleared
+
+--- PAUSE ---
+PASS  pause manager exists
+PASS  pause opens
+PASS  pause left panel is black
+PASS  pause animates while time is frozen
+PASS  pause opening animation completes
+PASS  pause right side is darkened
+PASS  pause freezes time
+PASS  pause unlocks the cursor
+PASS  pause blocks gameplay input
+PASS  pause locks walking and look
+PASS  pause does not duplicate managers
+PASS  pause shows its four actions
+PASS  pause buttons have no rectangles
+PASS  pause settings opens
+PASS  pause buttons hide in settings
+PASS  pause settings reuses the shared panel
+PASS  pause settings shows the graphics rows
+PASS  pause graphics controls use readable labels
+PASS  pause graphics rows fit inside the panel
+PASS  pause stays frozen in settings
+PASS  leaving settings does not resume
+PASS  pause actions return after settings
+PASS  continue resumes gameplay
+PASS  continue restores time scale
+PASS  continue restores the cursor
+PASS  continue unlocks walking and look
+PASS  pause canvas is hidden after continue
+
+--- TRANSITION ---
+PASS  pause reopens for the transition
+PASS  main menu transition starts
+PASS  pause closes for the transition
+PASS  loading screen is visible
+PASS  loading label animates dots
+PASS  main menu transition completes
+PASS  main menu is active after transition
+PASS  transition manager is idle
+PASS  transition overlay is hidden
+PASS  time scale is restored after transition
+PASS  menu cursor is visible
+PASS  story managers are cleaned for the menu
+PASS  pause manager is not duplicated
+PASS  transition manager is not duplicated
+
+--- CHAPTER INTRO ---
+PASS  chapter intro starts
+PASS  chapter intro shows the configured number
+PASS  chapter intro shows the configured title
+PASS  chapter intro shows the optional subtitle
+PASS  chapter intro background is black
+PASS  chapter intro uses the shared font
+PASS  chapter intro finishes
+
+--- LOADING INDICATOR ---
+PASS  loading indicator animates dots
+
+--- NEW GAME TRANSITION ---
+PASS  first chapter is configured
+PASS  new game transition starts
+PASS  loading screen is used for a new game
+PASS  chapter intro is used for a new game
+PASS  new game transition completes
+PASS  new game opens the first chapter
+PASS  transition overlay is hidden after new game
+PASS  time scale is restored after new game
+
+--- MUSIC ---
+PASS  music manager auto-bootstraps
+PASS  music database loads
+PASS  music database has every story cue
+PASS  background themes loop until another cue
+PASS  grocery store theme is a timed one-shot
+PASS  car arrival theme is a timed one-shot
+PASS  ending theme is a timed one-shot
+PASS  menu scene has a valid music binding
+PASS  home scene has a valid music binding
+PASS  city scene has a valid music binding
+PASS  driving scene has a valid music binding
+PASS  store scene has a valid music binding
+PASS  end scene has a valid music binding
+PASS  music database has no structural errors
+PASS  music manager is not duplicated
+PASS  unknown music cue is ignored
+PASS  music volume can be changed
+PASS  music can be muted
+PASS  music volume restores
+PASS  home plays its scene cue
+PASS  music manager survives a scene load
+PASS  music manager is not duplicated after a load
+PASS  menu binding is still active after the load
+PASS  menu plays its scene cue
+PASS  music stops cleanly
+PASS  music cue starts a clip
+PASS  music clip is playing
+PASS  music volume follows the cue
+PASS  music manager reports a looping cue
+PASS  music clip stops cleanly
+PASS  timed cue starts
+PASS  timed cue stops on its own
+
+--- END ---
+PASS  active scene is End
+PASS  end screen unlocks the cursor
+PASS  end screen controller exists
+PASS  end screen has an authored view
+PASS  end screen uses its own canvas
+PASS  end screen has a title
+PASS  end screen has fly-in lines
+PASS  end screen lines are authored
+PASS  end screen has a back button
+PASS  end back button says back to main menu
+PASS  end back button keeps the menu label size
+PASS  end screen animation completes
+PASS  end back button fades in
+PASS  end back button returns to the main menu
+
+RESULT: 276 passed, 0 failed

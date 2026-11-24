@@ -1,0 +1,43 @@
+Excerpt from Logs/citybuild.log
+Unity batchmode log from a CityBuilder.BuildCity run (full log kept locally)
+======================================================================
+COMMAND LINE ARGUMENTS:
+-batchmode
+-nographics
+-projectPath
+-executeMethod
+CityBuilder.BuildCity
+-logFile
+- Finished resetting the current domain, in  2.294 seconds
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:118)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:361)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:361)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:361)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:361)
+CityBuilder: placed 19 houses (saved=True)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:366)
+(Filename: Assets/Editor/CityBuilder.cs Line: 366)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:369)
+CityBuilder: driving scene synced=True
+CityBuilder:BuildCity () (at Assets/Editor/CityBuilder.cs:370)
+(Filename: Assets/Editor/CityBuilder.cs Line: 370)

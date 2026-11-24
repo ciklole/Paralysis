@@ -1,0 +1,119 @@
+City -> CarDriving environment sync
+Generated 2026-11-10 18:08:05Z
+Mode: DRY RUN
+City: Assets/Scenes/City.unity
+Driving: Assets/Scenes/CarDriving.unity
+
+Preserved driving roots:
+  Free Racing Car  [prefab instance]
+  FirstPersonController  [prefab instance]
+  StoryManagers
+  CarDriveSystems
+  Store Destination
+
+City environment roots:
+  City
+  Cube
+  V Cone Lit Optimized  [prefab instance]
+  Plane.009 (1)
+  Building_00083_LOD_1  [prefab instance]
+  Building_00009_LOD_0  [prefab instance]
+  Building_00276_LOD_1  [prefab instance]
+  Building_00286_LOD_0  [prefab instance]
+  Building_00905_LOD_1  [prefab instance]
+  Building_00906_LOD_1  [prefab instance]
+  Building_00188_LOD_1  [prefab instance]
+  B00024  [prefab instance]
+  B00024 (23)  [prefab instance]
+  B00024 (39)  [prefab instance]
+  B00024 (40)  [prefab instance]
+  B00024 (22)  [prefab instance]
+  B00024 (30)  [prefab instance]
+  B00024 (31)  [prefab instance]
+  B00024 (21)  [prefab instance]
+  B00024 (20)  [prefab instance]
+  B00024 (33)  [prefab instance]
+  B00024 (34)  [prefab instance]
+  B00024 (35)  [prefab instance]
+  B00024 (36)  [prefab instance]
+  B00024 (19)  [prefab instance]
+  B00024 (18)  [prefab instance]
+  B00024 (32)  [prefab instance]
+  B00024 (17)  [prefab instance]
+  B00024 (29)  [prefab instance]
+  B00024 (38)  [prefab instance]
+  B00024 (37)  [prefab instance]
+  B00024 (16)  [prefab instance]
+  B00024 (15)  [prefab instance]
+  B00024 (14)  [prefab instance]
+  B00024 (28)  [prefab instance]
+  B00024 (27)  [prefab instance]
+  B00024 (24)  [prefab instance]
+  B00024 (13)  [prefab instance]
+  B00024 (25)  [prefab instance]
+  B00024 (12)  [prefab instance]
+  B00024 (11)  [prefab instance]
+  B00024 (10)  [prefab instance]
+  B00024 (9)  [prefab instance]
+  B00024 (8)  [prefab instance]
+  B00024 (26)  [prefab instance]
+  B00024 (7)  [prefab instance]
+  B00024 (6)  [prefab instance]
+  B00024 (5)  [prefab instance]
+  B00024 (4)  [prefab instance]
+  B00024 (1)  [prefab instance]
+
+CarDriving environment roots (will be replaced):
+  City
+  Cube
+  V Cone Lit Optimized  [prefab instance]
+  Plane.009 (1)
+  Building_00083_LOD_1  [prefab instance]
+  Building_00009_LOD_0  [prefab instance]
+  Building_00276_LOD_1  [prefab instance]
+  Building_00286_LOD_0  [prefab instance]
+  Building_00905_LOD_1  [prefab instance]
+  Building_00906_LOD_1  [prefab instance]
+  Building_00188_LOD_1  [prefab instance]
+  B00024  [prefab instance]
+  B00024 (23)  [prefab instance]
+  B00024 (39)  [prefab instance]
+  B00024 (40)  [prefab instance]
+  B00024 (22)  [prefab instance]
+  B00024 (30)  [prefab instance]
+  B00024 (31)  [prefab instance]
+  B00024 (21)  [prefab instance]
+  B00024 (20)  [prefab instance]
+  B00024 (33)  [prefab instance]
+  B00024 (34)  [prefab instance]
+  B00024 (35)  [prefab instance]
+  B00024 (36)  [prefab instance]
+  B00024 (19)  [prefab instance]
+  B00024 (18)  [prefab instance]
+  B00024 (32)  [prefab instance]
+  B00024 (17)  [prefab instance]
+  B00024 (29)  [prefab instance]
+  B00024 (38)  [prefab instance]
+  B00024 (37)  [prefab instance]
+  B00024 (16)  [prefab instance]
+  B00024 (15)  [prefab instance]
+  B00024 (14)  [prefab instance]
+  B00024 (28)  [prefab instance]
+  B00024 (27)  [prefab instance]
+  B00024 (24)  [prefab instance]
+  B00024 (13)  [prefab instance]
+  B00024 (25)  [prefab instance]
+  B00024 (12)  [prefab instance]
+  B00024 (11)  [prefab instance]
+  B00024 (10)  [prefab instance]
+  B00024 (9)  [prefab instance]
+  B00024 (8)  [prefab instance]
+  B00024 (26)  [prefab instance]
+  B00024 (7)  [prefab instance]
+  B00024 (6)  [prefab instance]
+  B00024 (5)  [prefab instance]
+  B00024 (4)  [prefab instance]
+  B00024 (1)  [prefab instance]
+
+Environment differences:
+  none detected
